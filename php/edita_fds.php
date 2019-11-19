@@ -4,7 +4,7 @@ $fds = array('fds'=>$_POST['fds']);
 
 $fds = json_encode($fds);
 
-$file = fopen('../_app/var.json','w');
+$file = fopen('../_app/var.json', 'w');
 fwrite($file, $fds);
 
 ?>

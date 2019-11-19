@@ -1,25 +1,25 @@
  <?php
 
-  $encoding = mb_internal_encoding();
+    $encoding = mb_internal_encoding();
 
-  date_default_timezone_set('America/Sao_Paulo');
-  $data_atual = date('Y-m-d');
+    date_default_timezone_set('America/Sao_Paulo');
+    $data_atual = date('Y-m-d');
 
-  $info = $_GET;
+    $info = $_GET;
 
-  $recibo = $crud->pdo_src('recibo', 'WHERE id = '.$info['id'])[0];
-  $contrato = $crud->pdo_src('contrato', 'WHERE id_contrato = '.$recibo['id_contrato'])[0];
+    $recibo = $crud->pdo_src('recibo', 'WHERE id = '.$info['id'])[0];
+    $contrato = $crud->pdo_src('contrato', 'WHERE id_contrato = '.$recibo['id_contrato'])[0];
 
-  $val_t = 0;
-  for($i=1;$i<=10;$i++){
+    $val_t = 0;
+    for($i=1;$i<=10;$i++){
     $qtd = "servico_$i";
     $val = "val_servico_$i";
     $val_t += $recibo[$qtd] * $recibo[$val];
-  }
-  $val_t = number_format($val_t,2,",",".");
+    }
+    $val_t = number_format($val_t,2,",",".");
 
-  date_default_timezone_set('America/Sao_Paulo');
-  $hoje = strftime('%d de %B de %Y', strtotime('today'));
+    date_default_timezone_set('America/Sao_Paulo');
+    $hoje = strftime('%d de %B de %Y', strtotime('today'));
 
 ?>
 <div style="position: fixed; z-index: 1000; width: 100%; height: 100%; background-color: white;">
@@ -137,40 +137,40 @@ tfoot{
 
     <table style="border: 1px solid black;">
       <?php
-      $servicos = array();
-      for($i=1;$i<=10;$i++){
+        $servicos = array();
+        for($i=1;$i<=10;$i++){
         if($recibo['servico_'.$i] != 0){
-          $servicos[] = $i;
+            $servicos[] = $i;
         }
-      }
-      $servicos = implode(",",$servicos);
+        }
+        $servicos = implode(",",$servicos);
 
-      $servicos_t = $crud->pdo_src('servico', "");
+        $servicos_t = $crud->pdo_src('servico', "");
 
-      $serv = false;
-      for($i=1;$i<=10;$i++){
+        $serv = false;
+        for($i=1;$i<=10;$i++){
 
         $label = "servico_$i";
         $label_val = "val_servico_$i";
         if($recibo[$label] != '0'){
 
-          foreach($servicos_t as $key){
+            foreach($servicos_t as $key){
             if($key['id'] == $i){
-              $servico_txt = $key['servico'];
+                $servico_txt = $key['servico'];
             }
-          }
-          $serv = true;
+            }
+            $serv = true;
 
-          echo "<tr><td width=270>" . $servico_txt . "</td><td align=center width=50>x" . $recibo[$label] . "</td></tr>";
+            echo "<tr><td width=270>" . $servico_txt . "</td><td align=center width=50>x" . $recibo[$label] . "</td></tr>";
 
         }
-      }
+        }
 
-      if($serv==false){
+        if($serv==false){
         echo "<tr><td align=center width=320 >Nenhum Serviço Registrado</td></tr>";
-      }
+        }
 
-      ?>
+        ?>
     </table>
 
     <br/>
@@ -179,7 +179,7 @@ tfoot{
     Rio de Janeiro, <?= $hoje ?>, <?= date('H:i:s') ?>.
 
     <?php
-    if($recibo['status'] == 2){
+    if ($recibo['status'] == 2) {
     ?>
     <br/><br/>
     RECIBO BAIXADO <br><br> Motivo:

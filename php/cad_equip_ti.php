@@ -12,7 +12,7 @@ $info = $_POST;
 $crud->pdo_cadastro('equip_ti', $info);
 //fim------------------------------
 
-$id_prop = $crud->pdo_src('equip_ti','ORDER BY id DESC LIMIT 1')[0][0];
+$id_prop = $crud->pdo_src('equip_ti', 'ORDER BY id DESC LIMIT 1')[0][0];
 
 //retorna para a lista
 ?>

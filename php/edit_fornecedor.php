@@ -8,7 +8,7 @@ $info = $_POST;
 //print_r($info);
 
 //cadastra funcionario----------------
-$crud->pdo_edit( 'fornecedor', $info, 'id');
+$crud->pdo_edit('fornecedor', $info, 'id');
 //fim------------------------------
 
 //retorna para a lista

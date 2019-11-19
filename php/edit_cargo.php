@@ -15,13 +15,13 @@ $dupl = $crud->pdo_src($tabela, "WHERE cargo LIKE '$fabr' AND id != ".$info['id'
 //print_r($dupl);
 
 if($dupl != array()){
-	?>
+    ?>
 	<script type="text/javascript">
 	alert("Duplicidade encontrada! por favor verifique se o item desejado já se encontra cadastrado.");
 	window.history.go(-1);
 	</script>
 	<?php
-	die();
+    die();
 }
 
 //cadastra o aluno-----------------

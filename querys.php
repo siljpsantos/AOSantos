@@ -34,7 +34,7 @@ class crud {
     // --------------------------------------------
     private function chk_login($info) {
 
-        $info['senha'] = crypt($info['senha'],'inforway');
+        $info['senha'] = crypt($info['senha'], 'inforway');
 
         $select = $this->pdo->prepare("SELECT * FROM tb_usuario WHERE login_usuario = ? AND senha_usuario = ?");
 
@@ -74,7 +74,7 @@ class crud {
         $sql = substr_replace($sql, "", -2);
         $sql .= ") VALUES (";
 
-        for ($i = 0; $i<$cont_param; $i++) {
+        for ($i = 0; $i < $cont_param; $i++) {
             $sql .= "?,";
         }
 

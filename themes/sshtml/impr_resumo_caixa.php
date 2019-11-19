@@ -1,26 +1,26 @@
  <?php
 
-  $encoding = mb_internal_encoding();
+    $encoding = mb_internal_encoding();
 
-  date_default_timezone_set('America/Sao_Paulo');
-  $data_atual = date('Y-m-d');
+    date_default_timezone_set('America/Sao_Paulo');
+    $data_atual = date('Y-m-d');
 
-  $info = $_GET;
+    $info = $_GET;
 
-  $contrato = $crud->pdo_src('contrato','WHERE id_contrato = '.$info['id_contrato'])[0];
+    $contrato = $crud->pdo_src('contrato','WHERE id_contrato = '.$info['id_contrato'])[0];
 
-  $func_contrato = $crud->query_p('
+    $func_contrato = $crud->query_p('
 		SELECT
 			COUNT(DISTINCT f.id)
 		FROM
 			tb_funcionario_contrato fc
 			INNER JOIN tb_funcionario f ON f.id = fc.id_funcionario
 		WHERE
-			fc.id_contrato = '.$info['id_contrato'].'
+			fc.id_contrato = '.$info['id_contrato'] . '
       AND
-      data_hora_ini <= "'.$info['data_ini'].' 23:59:59"
+      data_hora_ini <= "'.$info['data_ini'] . ' 23:59:59"
       AND
-      (data_hora_fin >= "'.$info['data_fin'].' 23:59:59" OR data_hora_fin = "0000-00-00 00:00:00")
+      (data_hora_fin >= "'.$info['data_fin'] . ' 23:59:59" OR data_hora_fin = "0000-00-00 00:00:00")
 
 	')[0][0];
 
@@ -112,8 +112,8 @@ tbody tr td{
       		</tr>
       	<tr>
       		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" colspan=2 height="21" align="left" valign=middle><font size=3 color="#000000">Contrato: <?= $contrato['nome'] ?></font></td>
-      		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="left" valign=bottom><font size=3 color="#000000">De: <?= implode("/",array_reverse(explode("-",$info['data_ini']))); ?></font></td>
-      		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="left" valign=bottom><font size=3 color="#000000">À: <?= implode("/",array_reverse(explode("-",$info['data_fin']))); ?></font></td>
+      		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="left" valign=bottom><font size=3 color="#000000">De: <?= implode("/", array_reverse(explode("-", $info['data_ini']))); ?></font></td>
+      		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="left" valign=bottom><font size=3 color="#000000">À: <?= implode("/", array_reverse(explode("-", $info['data_fin']))); ?></font></td>
       	</tr>
       	<tr>
       		<td style="border: 0; " colspan=4 height="10" align="center" valign=middle><font size=1 color="#000000"></font></td>
@@ -144,24 +144,24 @@ tbody tr td{
         $saidas = "";
         for($i = $begin; $i <= $end; $i->modify('+1 day')){
 
-          if($sim){
+            if($sim){
             $fundo = 'fundo_2';
             $sim = false;
-          }else{
+            }else{
             $fundo = '';
             $sim = true;
-          }
+            }
 
-          $recibos = $crud->query_p('
+            $recibos = $crud->query_p('
             SELECT r.*, c.nome
             FROM tb_recibo r
             INNER JOIN tb_contrato c ON c.id_contrato = r.id_contrato
-            WHERE r.id_contrato = '.$info['id_contrato'].' AND data_hora LIKE "%'.$i->format("Y-m-d").'%"
+            WHERE r.id_contrato = '.$info['id_contrato'] . ' AND data_hora LIKE "%' . $i->format("Y-m-d") . '%"
               AND r.status = 1
             ORDER BY r.data_hora DESC
           ');
 
-          $despesas = $crud->query_p('
+            $despesas = $crud->query_p('
             SELECT SUM(d.valor)
             FROM tb_despesa d
             INNER JOIN tb_contrato c ON c.id_contrato = d.id_contrato
@@ -170,31 +170,31 @@ tbody tr td{
             ORDER BY d.data_hora DESC
           ');
 
-          $val_t_t = 0;
-          foreach($recibos as $index=>$key){
+            $val_t_t = 0;
+            foreach($recibos as $index=>$key){
             $val_t = 0;
             for($j=1;$j<=10;$j++){
-              $qtd = "servico_$j";
-              $val = "val_servico_$j";
-              $val_t += $key[$qtd] * $key[$val];
+                $qtd = "servico_$j";
+                $val = "val_servico_$j";
+                $val_t += $key[$qtd] * $key[$val];
             }
             $recibos[$index]['val_t'] = $val_t;
             $val_t_t += $recibos[$index]['val_t'];
-          }
+            }
 
-          $tot_dia = $val_t_t - $despesas[0][0];
+            $tot_dia = $val_t_t - $despesas[0][0];
 
-          $tot_e += $val_t_t;
-          $tot_d += $despesas[0][0];
-          $tot_t += $tot_dia;
+            $tot_e += $val_t_t;
+            $tot_d += $despesas[0][0];
+            $tot_t += $tot_dia;
 
-          // $dias .= "'".$i->format("d/m")."',";
-          // $entradas .= $val_t_t == "" ? "0," : $val_t_t.",";
-          // $saidas .= $despesas[0][0] == "" ? "0," : $despesas[0][0].",";
+            // $dias .= "'".$i->format("d/m")."',";
+            // $entradas .= $val_t_t == "" ? "0," : $val_t_t.",";
+            // $saidas .= $despesas[0][0] == "" ? "0," : $despesas[0][0].",";
 
-          $dia = strftime('%a', strtotime($i->format('Y-m-d')));
+            $dia = strftime('%a', strtotime($i->format('Y-m-d')));
 
-          if(utf8_encode($dia) != 'sáb' && $dia != 'dom'){
+            if(utf8_encode($dia) != 'sáb' && $dia != 'dom'){
 
         ?>
         <tr>
@@ -215,15 +215,15 @@ tbody tr td{
         <tfoot>
           <tr>
         		<td class="fundo" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" height="20" align="left" valign=bottom sdnum="1033;1033;M/D/YYYY"><font color="#000000">Totais</font></td>
-        		<td class="fundo" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="right" valign=bottom ><font color="#000000"><span style="float: left;">R$</span> <?= number_format($tot_e,2,",",".") ?> </font></td>
-        		<td class="fundo" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="right" valign=bottom ><font color="#000000"><span style="float: left;">R$</span> <?= number_format($tot_d,2,",",".") ?> </font></td>
-        		<td class="fundo" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="right" valign=bottom ><b><font color="#000000"><span style="float: left;">R$</span> <?= number_format($tot_t,2,",",".") ?> </font></b></td>
+        		<td class="fundo" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="right" valign=bottom ><font color="#000000"><span style="float: left;">R$</span> <?= number_format($tot_e, 2, ",", ".") ?> </font></td>
+        		<td class="fundo" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="right" valign=bottom ><font color="#000000"><span style="float: left;">R$</span> <?= number_format($tot_d, 2, ",", ".") ?> </font></td>
+        		<td class="fundo" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="right" valign=bottom ><b><font color="#000000"><span style="float: left;">R$</span> <?= number_format($tot_t, 2, ",", ".") ?> </font></b></td>
         	</tr>
           <tr>
             <td ></td>
             <td ></td>
-            <td align=right><b>Percent. Total (<?= number_format($contrato['percent'],0,"","") ?>%)</b></td>
-            <td class="fundo" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="right" valign=bottom ><b><font color="#000000"><span style="float: left;">R$</span> <?= number_format($tot_t*($contrato['percent']/100),2,",",".") ?> </font></b></td>
+            <td align=right><b>Percent. Total (<?= number_format($contrato['percent'], 0, "", "") ?>%)</b></td>
+            <td class="fundo" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="right" valign=bottom ><b><font color="#000000"><span style="float: left;">R$</span> <?= number_format($tot_t * ($contrato['percent'] / 100), 2, ",", ".") ?> </font></b></td>
           </tr>
           <tr>
             <td ></td>
@@ -235,7 +235,7 @@ tbody tr td{
             <td ></td>
             <td ></td>
             <td align=right><b>Valor Por Func.</b></td>
-            <td class="fundo" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="right" valign=bottom ><b><font color="#000000"><span style="float: left;">R$</span> <?= number_format( ($tot_t*($contrato['percent']/100))/$func_contrato ,2,",",".") ?></font></b></td>
+            <td class="fundo" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="right" valign=bottom ><b><font color="#000000"><span style="float: left;">R$</span> <?= number_format(($tot_t * ($contrato['percent'] / 100)) / $func_contrato, 2, ",", ".") ?></font></b></td>
           </tr>
         </tfoot>
     </table>
@@ -358,10 +358,10 @@ tbody tr td{
       </thead>
       <tfoot>
         <tr>
-          <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" height="10" align="right" valign=bottom ><font color="#000000"><span style="float: left;">R$</span> <?= number_format($tot_t,2,",",".") ?></font></td>
-          <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="right" valign=bottom ><font color="#000000"><span style="float: left;">R$</span> <?= number_format($tot_t*0.3,2,",",".") ?></font></td>
+          <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" height="10" align="right" valign=bottom ><font color="#000000"><span style="float: left;">R$</span> <?= number_format($tot_t, 2, ",", ".") ?></font></td>
+          <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="right" valign=bottom ><font color="#000000"><span style="float: left;">R$</span> <?= number_format($tot_t * 0.3, 2, ",", ".") ?></font></td>
           <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom ><font color="#000000"><?= $func_contrato ?></font></td>
-          <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="right" valign=bottom ><font color="#000000"><span style="float: left;">R$</span> <?= number_format( ($tot_t*0.3)/$func_contrato ,2,",",".") ?> </font></td>
+          <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="right" valign=bottom ><font color="#000000"><span style="float: left;">R$</span> <?= number_format(($tot_t * 0.3) / $func_contrato, 2, ",", ".") ?> </font></td>
         </tr>
       </tfoot>
     </table> -->

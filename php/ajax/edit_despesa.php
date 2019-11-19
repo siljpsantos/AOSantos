@@ -21,29 +21,29 @@ $contratos = $crud->pdo_src('contrato','');
 
 $dis = "";
 if($despesa['status'] >= 1){
-  $dis = "disabled";
+    $dis = "disabled";
 }
 echo'<script>$("#faturar_btn").show();</script>';
 echo'<script>$("#motivo_baixa").hide();</script>';
 $dis2 = "";
 if($despesa['status'] == 2){
-  $dis2 = "disabled";
-  echo'<script>$("#baixar_btn").hide();</script>';
-  echo'<script>$("#motivo_baixa").show();</script>';
+    $dis2 = "disabled";
+    echo'<script>$("#baixar_btn").hide();</script>';
+    echo'<script>$("#motivo_baixa").show();</script>';
 }
 
 
 $nobl ="block";
 if($despesa['status'] >= 1){
-  echo'<script>$("#faturar_btn").hide();</script>';
-  $nobl="none";
+    echo'<script>$("#faturar_btn").hide();</script>';
+    $nobl="none";
 }
 
 // print_r($recibos);
 $status = array(
-  0 => "Em aberto",
-  1 => "Faturada",
-  2 => "Baixada"
+    0 => "Em aberto",
+    1 => "Faturada",
+    2 => "Baixada"
 );
 
 $status_l = $status[$despesa['status']];
@@ -72,15 +72,15 @@ $status_l = $status[$despesa['status']];
          <select disabled class="form-control" name="id_contrato" >
              <option></option>
              <?php
-             foreach ($contratos as $key) {
-                 $id = $key['id_contrato'];
-                 $nome = $key['nome'];
-                 if($id == $despesa['id_contrato']){
-                   echo "<option selected value=$id>$nome</option>";
-                 }
+                foreach ($contratos as $key) {
+                    $id = $key['id_contrato'];
+                    $nome = $key['nome'];
+                    if($id == $despesa['id_contrato']){
+                    echo "<option selected value=$id>$nome</option>";
+                    }
 
-             }
-             ?>
+                }
+                ?>
          </select>
        </div>
 

@@ -3,10 +3,10 @@
     //protege de entrada sem ser ADM
     if ($_SESSION != array()) {
         if ($_SESSION['nivel_usuario'] == 'adm') {
-        }else {
+        } else {
             echo "<script>window.location.href='" . HOME . "/403';</script>";
         }
-    }else {
+    } else {
         echo "<script>window.location.href='" . HOME . "/403';</script>";
     }
 
@@ -17,8 +17,8 @@
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
-        for ($i = 0; $i<$length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength-1)];
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
 
@@ -136,7 +136,7 @@
 						</div>
 					</div>
 
-          <?php if($_SESSION['id_usuario'] =="1"){ ?>
+          <?php if ($_SESSION['id_usuario'] == "1") { ?>
 
             <div class="col-md-3 grade">
   						<div class="form-check">

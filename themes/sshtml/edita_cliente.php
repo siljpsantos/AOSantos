@@ -1,25 +1,25 @@
 <?php
 
-	//protege entrada sem permissão
-	// if(@$_SESSION == array()){
-	// 	echo "<script>window.location.href='" . HOME . "/403';</script>";
-	// }else{
-	// 	if ($_SESSION['perm_ti'] == "1") {
-	// 	} else {
-	// 		echo "<script>window.location.href='" . HOME . "/403';</script>";
-	// 	}
-	// }
+    //protege entrada sem permissão
+    // if(@$_SESSION == array()){
+    // 	echo "<script>window.location.href='" . HOME . "/403';</script>";
+    // }else{
+    // 	if ($_SESSION['perm_ti'] == "1") {
+    // 	} else {
+    // 		echo "<script>window.location.href='" . HOME . "/403';</script>";
+    // 	}
+    // }
 
-	$proposta = $crud->pdo_src('cliente', 'WHERE id = '.$_GET['id'])[0];
-	// $unidades = $crud->pdo_src('unidade', 'order by nome ');
+    $proposta = $crud->pdo_src('cliente', 'WHERE id = '.$_GET['id'])[0];
+    // $unidades = $crud->pdo_src('unidade', 'order by nome ');
 
-	// $hist = $crud->query_p('
-	// 	SELECT u.nome, h.*
-	// 	FROM tb_hist_equip_ti h
-	// 	INNER JOIN tb_unidade u ON u.id_unidade = h.id_unidade
-	// 	WHERE h.id_equip_ti = '.$_GET['id'].'
-	// 	ORDER BY data_entrega DESC
-	// ');
+    // $hist = $crud->query_p('
+    // 	SELECT u.nome, h.*
+    // 	FROM tb_hist_equip_ti h
+    // 	INNER JOIN tb_unidade u ON u.id_unidade = h.id_unidade
+    // 	WHERE h.id_equip_ti = '.$_GET['id'].'
+    // 	ORDER BY data_entrega DESC
+    // ');
 
 ?>
 

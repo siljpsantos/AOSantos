@@ -117,21 +117,21 @@
 
     $info = $_GET;
 
-    $recibo =  $crud->query_p('
+    $recibo = $crud->query_p('
       SELECT r.*, c.nome
       FROM tb_recibo r
       INNER JOIN tb_contrato c ON c.id_contrato = r.id_contrato
-      WHERE r.id_contrato = '.$info['id_contrato'].' AND data_hora BETWEEN "'.$info['ini'].' 00:00:00" AND "'.$info['fin'].' 23:59:59"
+      WHERE r.id_contrato = '.$info['id_contrato'] . ' AND data_hora BETWEEN "' . $info['ini'] . ' 00:00:00" AND "' . $info['fin'] . ' 23:59:59"
         AND r.status = 1
       ORDER BY r.data_hora DESC
     ');
 
-    $contrato =$crud->pdo_src('contrato','where id_contrato='.$info['id_contrato'])[0];
+    $contrato = $crud->pdo_src('contrato', 'where id_contrato=' . $info['id_contrato'])[0];
     $valor = 0;
 
 
     // print_r($recibo)
-     ?>
+        ?>
 <style>
 /* @page {  margin-right: 0.511811024in; margin-top: 0.787401575in; margin-bottom: 0.787401575in; }
 body { margin-right: 0.511811024in; margin-top: 0.787401575in; margin-bottom: 0.787401575in; } */
@@ -153,8 +153,8 @@ body { margin-right: 0.511811024in; margin-top: 0.787401575in; margin-bottom: 0.
         	<tr>
         		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 0" colspan=2 height="21" align="left" valign=middle><font size=3 color="#000000">Contrato: <?= $contrato['nome'] ?></font></td>
         		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 0; border-right: 1px solid #000000" colspan=3 align="RIGHT" valign=bottom><font size=3 color="#000000">
-              De <?= implode("/",array_reverse(explode("-",$info['ini']))); ?>
-              à <?= implode("/",array_reverse(explode("-",$info['fin']))); ?></font>
+              De <?= implode("/", array_reverse(explode("-", $info['ini']))); ?>
+              à <?= implode("/", array_reverse(explode("-", $info['fin']))); ?></font>
             </td>
         	</tr>
           <!-- <img style="width:10%;margin-bottom:10px;" src="themes/sshtml/img/logo.png" />
@@ -180,27 +180,27 @@ body { margin-right: 0.511811024in; margin-top: 0.787401575in; margin-bottom: 0.
 <?php
 $total=0;
 foreach ($recibo as $index=>$key) {
-  echo '<tr class="row5" align="center">';
-  $data_h = explode(" ",$key['data_hora'])[0];
-  $data_h = strftime('%a,%d/%m/%Y', strtotime($data_h));
-  if($index > 0){
+    echo '<tr class="row5" align="center">';
+    $data_h = explode(" ",$key['data_hora'])[0];
+    $data_h = strftime('%a,%d/%m/%Y', strtotime($data_h));
+    if($index > 0){
     if(explode(" ",$recibo[$index-1]['data_hora'])[0] != explode(" ",$recibo[$index]['data_hora'])[0] ){
-      echo'<td align="center" style="font-size:8pt;" class="column0 fundocinza"><b>'.utf8_encode($data_h).'</b></td>';
-      $pinta = 'fundocinza';
+        echo'<td align="center" style="font-size:8pt;" class="column0 fundocinza"><b>'.utf8_encode($data_h).'</b></td>';
+        $pinta = 'fundocinza';
     } else {
-      echo'<td></td>';
-      $pinta = '';
+        echo'<td></td>';
+        $pinta = '';
     }
 }else {
-  echo'<td align="center" style="font-size:8pt;" class="column0 fundocinza"><b>'.utf8_encode($data_h).'</b></td>';
-  $pinta = 'fundocinza';
+    echo'<td align="center" style="font-size:8pt;" class="column0 fundocinza"><b>'.utf8_encode($data_h).'</b></td>';
+    $pinta = 'fundocinza';
 }
 
-  $valor=0;
+    $valor=0;
 
-  for ($i=1; $i <= 10 ; $i++) {
+    for ($i=1; $i <= 10 ; $i++) {
     $valor += $key['val_servico_'.$i] * $key['servico_'.$i];
-  }
+    }
     $total += $valor;
 
 ?>
@@ -209,7 +209,7 @@ foreach ($recibo as $index=>$key) {
   <td class="column1 <?= $pinta ?>" style="font-size:8pt !important ; text-align: left;"><?= $key['fornecedor'] ?></td>
   <td class="column2 <?= $pinta ?>" style="font-size:8pt !important ;text-align: left;"><?= sprintf('%06d', $key['id']); ?></td>
   <td class="column3 <?= $pinta ?>" style="font-size:8pt !important ;text-align: left;"><?= $key['num_nota'] ?></td>
-  <td class="column4 <?= $pinta ?>" style="font-size:8pt !important ; text-align: right; white-space: nowrap;"><b><span style="float: left;">R$</span><?= number_format($valor,2,",",".")?></b></td></td>
+  <td class="column4 <?= $pinta ?>" style="font-size:8pt !important ; text-align: right; white-space: nowrap;"><b><span style="float: left;">R$</span><?= number_format($valor, 2, ",", ".")?></b></td></td>
 </tr>
 <?php
 }
@@ -222,7 +222,7 @@ foreach ($recibo as $index=>$key) {
         <tfoot>
           <tr class="row7">
             <td class="column2  s  fundozinza-verde " align="left" style=" border:1px solid #000 !important; text-align: left;" colspan="4" rowspan="2">Total</td>
-            <td class="column2  s  fundozinza-verde " style=" border:1px solid #000 !important; text-align: right;" colspan="1" rowspan="2"><b><span style="float: left;">R$</span> <?= number_format($total,2,",",".")?></b></td>
+            <td class="column2  s  fundozinza-verde " style=" border:1px solid #000 !important; text-align: right;" colspan="1" rowspan="2"><b><span style="float: left;">R$</span> <?= number_format($total, 2, ",", ".")?></b></td>
 
           </tr>
         </tfoot>

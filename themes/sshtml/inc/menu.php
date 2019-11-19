@@ -1,9 +1,9 @@
 <?php
-  $nivel_adm = @$_SESSION['nivel_usuario'] == "adm" ? true : false;
-  $contratos_m = $crud->pdo_src('contrato', '');
+    $nivel_adm = @$_SESSION['nivel_usuario'] == "adm" ? true : false;
+    $contratos_m = $crud->pdo_src('contrato', '');
 
-  $perm_w = $_SESSION['id_usuario'] == "11" ? true : false;
-  $perm_f = $_SESSION['id_usuario'] == "12" ? true : false;
+    $perm_w = $_SESSION['id_usuario'] == "11" ? true : false;
+    $perm_f = $_SESSION['id_usuario'] == "12" ? true : false;
 ?>
 <style>
 .dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;        -webkit-transition: height 0.5s linear .4s; transition: height 0.5s linear .4s;}
@@ -69,17 +69,17 @@
          					<select required class="form-control select_normal" name="id_contrato">
          						<option></option>
          						<?php
-         						foreach($contratos_m as $key){
-         							$id = $key['id_contrato'];
-         							$nome = $key['nome'];
+                                    foreach($contratos_m as $key){
+                                        $id = $key['id_contrato'];
+                                        $nome = $key['nome'];
 
-         							// if($id == $proposta['id_cargo']){
-         							// 	echo "<option selected value=$id>$nome</option>";
-         							// }else{
-         								echo "<option value=$id>$nome</option>";
-         							// }
-         						}
-         						?>
+                                        // if($id == $proposta['id_cargo']){
+                                        // 	echo "<option selected value=$id>$nome</option>";
+                                        // }else{
+                                            echo "<option value=$id>$nome</option>";
+                                        // }
+                                    }
+                                    ?>
          					</select>
          				</div>
          				<div class="col-md-4">
@@ -211,13 +211,13 @@
                    </ul>
                  </li>
 
-                 <?php if($nivel_adm){ ?>
+                 <?php if ($nivel_adm) { ?>
                    <li class="dropdown hovermenu">
                      <div class="li1"><i class="fas fa-paste"></i><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span>Relatórios</span></a></div>
 
                      <ul class="submenu transicaomenu hovermenu">
 
-                       <li class="li2" ><a <?php if($nivel_adm && !($perm_w || $perm_f)){ ?> onclick='$("#modal_resumo_caixa").modal("show");' <?php }else{ echo "class='disabled' style='cursor:not-allowed;'"; } ?> ><span>Resumo de Caixa</span></a></li>
+                       <li class="li2" ><a <?php if ($nivel_adm && !($perm_w || $perm_f)) { ?> onclick='$("#modal_resumo_caixa").modal("show");' <?php } else { echo "class='disabled' style='cursor:not-allowed;'"; } ?> ><span>Resumo de Caixa</span></a></li>
                        <!-- <li class="li2" ><a <?= $nivel_adm ? "href='view_pg_func'" : "class='disabled'"; ?> ><span>PG Funcionário</span></a></li> -->
                        <!-- <li class="li2" ><a <?= $nivel_adm ? "href='view_recibo'" : "class='disabled'"; ?> ><span>Recibos</span></a></li>
                        <li class="li2" ><a <?= $nivel_adm ? "href='view_despesa'" : "class='disabled'"; ?> ><span>Despesas</span></a></li> -->
@@ -290,7 +290,7 @@
             <i style="font-size: 14pt; margin-top: 0px;" class="fas fa-home"></i>
             </a>
         </li>
-      <?php if($Url[0] != "" && $Url[0] != "index" && $Url[0] != "login"){ ?>
+      <?php if ($Url[0] != "" && $Url[0] != "index" && $Url[0] != "login") { ?>
       <li class="icon_full">
           <a class="pull-left navbar-brand" style="cursor: pointer;" onclick="window.history.go(-1);">
           <i style="font-size: 14pt; margin-top: 0px;" class="fas fa-arrow-left"></i>
@@ -344,7 +344,7 @@
             </ul>
           </li>
 
-          <?php if($nivel_adm){ ?>
+          <?php if ($nivel_adm) { ?>
             <li class="dropdown">
               <div class="li1"><i class="fas fa-paste"></i><a class="dropdown-toggle" data-toggle="dropdown" href="#"><b><span>Relatórios</span></b></a></div>
 

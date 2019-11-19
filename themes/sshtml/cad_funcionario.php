@@ -1,21 +1,21 @@
 <?php
 
-	//protege entrada sem permissão
-	if(@$_SESSION == array()){
-		echo "<script>window.location.href='" . HOME . "/403';</script>";
-	}else{
-		// if (false) {
-		// } else {
-		// 	echo "<script>window.location.href='" . HOME . "/403';</script>";
-		// }
-	}
+    //protege entrada sem permissão
+    if(@$_SESSION == array()){
+        echo "<script>window.location.href='" . HOME . "/403';</script>";
+    }else{
+        // if (false) {
+        // } else {
+        // 	echo "<script>window.location.href='" . HOME . "/403';</script>";
+        // }
+    }
 
-	$cargos = $crud->pdo_src('cargo', 'ORDER BY cargo');
+    $cargos = $crud->pdo_src('cargo', 'ORDER BY cargo');
 
-	// $proposta = $crud->pdo_src('equip_ti', 'WHERE id = '.$_GET['id'])[0];
-	// $marcas = $crud->pdo_src('marca_equip_ti', 'order by marca_equip_ti ');
-	//$modelos = $crud->pdo_src('modelo_equip_ti', 'order by modelo_equip_ti ');
-	// $categorias = $crud->pdo_src('categoria_equip_ti', 'order by categoria_equip_ti ');
+    // $proposta = $crud->pdo_src('equip_ti', 'WHERE id = '.$_GET['id'])[0];
+    // $marcas = $crud->pdo_src('marca_equip_ti', 'order by marca_equip_ti ');
+    //$modelos = $crud->pdo_src('modelo_equip_ti', 'order by modelo_equip_ti ');
+    // $categorias = $crud->pdo_src('categoria_equip_ti', 'order by categoria_equip_ti ');
 
 ?>
 
@@ -79,18 +79,18 @@ function buscar_categoria(){
 								    <select required class="form-control select_normal" name="id_cargo">
 								        <option></option>
 								        <?php
-								        foreach ($cargos as $key) {
-								            $id = $key['id'];
-								            $nome = $key['cargo'];
+                                        foreach ($cargos as $key) {
+                                            $id = $key['id'];
+                                            $nome = $key['cargo'];
 
-								            //if($id == $equip['id_cargo']){
-								            //	echo "<option selected value=$id>$nome</option>";
-								            //}else{
-								            	echo "<option value=$id>$nome</option>";
-								            //}
+                                            //if($id == $equip['id_cargo']){
+                                            //	echo "<option selected value=$id>$nome</option>";
+                                            //}else{
+                                                echo "<option value=$id>$nome</option>";
+                                            //}
 
-								        }
-								        ?>
+                                        }
+                                        ?>
 								    </select>
 								</div>
 

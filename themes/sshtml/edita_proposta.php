@@ -1,21 +1,21 @@
 <?php
 
-	//protege entrada sem permissão
-	if(@$_SESSION == array()){
-		echo "<script>window.location.href='" . HOME . "/403';</script>";
-	}else{
-		// if ($_SESSION['perm_frota'] == "1") {
-		// } else {
-		// 	echo "<script>window.location.href='" . HOME . "/403';</script>";
-		// }
-	}
+    //protege entrada sem permissão
+    if(@$_SESSION == array()){
+        echo "<script>window.location.href='" . HOME . "/403';</script>";
+    }else{
+        // if ($_SESSION['perm_frota'] == "1") {
+        // } else {
+        // 	echo "<script>window.location.href='" . HOME . "/403';</script>";
+        // }
+    }
 
 
-	$loc = $crud->pdo_src('cliente','');
-	$proposta = $crud->pdo_src('proposta', 'WHERE id = '.$_GET['id'])[0];
+    $loc = $crud->pdo_src('cliente','');
+    $proposta = $crud->pdo_src('proposta', 'WHERE id = '.$_GET['id'])[0];
 
-	$contratos = $crud->pdo_src('contrato', '/*WHERE id_proposta = 0 OR id_proposta != '.$_GET['id'].' ORDER BY nome*/');
-	$documentos = $crud->pdo_src('doc_proposta', 'WHERE id_proposta = '.$_GET['id']);
+    $contratos = $crud->pdo_src('contrato', '/*WHERE id_proposta = 0 OR id_proposta != '.$_GET['id'].' ORDER BY nome*/');
+    $documentos = $crud->pdo_src('doc_proposta', 'WHERE id_proposta = '.$_GET['id']);
 
 ?>
 <script>
@@ -67,14 +67,14 @@
     }
     <?php
     if($proposta['id_contrato']!="0"){
-		echo '
+        echo '
 			$( document ).ready(function() {
 			    $(":input").prop("disabled", true);
 			});
 		';
 
-		$del = "style='display: none;'";
-	}
+        $del = "style='display: none;'";
+    }
     ?>
 </script>
 <div class="panel panel-default" style="margin: 0 10px 0 10px">
@@ -105,19 +105,19 @@
 								<select class="form-control" required name="id_cliente">
 									<option></option>
 									<?php
-										foreach($loc as $index=>$key){
+                                        foreach($loc as $index=>$key){
 
-											$id = $key['id'];
-											$nome = $key['nome'];
+                                            $id = $key['id'];
+                                            $nome = $key['nome'];
 
-											if($id == $proposta['id_cliente']){
-												echo "<option selected value='$id'>$nome</option>";
-											}else{
-												echo "<option value='$id'>$nome</option>";
-											}
+                                            if($id == $proposta['id_cliente']){
+                                                echo "<option selected value='$id'>$nome</option>";
+                                            }else{
+                                                echo "<option value='$id'>$nome</option>";
+                                            }
 
-										}
-									?>
+                                        }
+                                    ?>
 								</select>
 							</div>
 							<!--<div class="col-md-10">
@@ -151,19 +151,19 @@
 								<select onchange="termo_obrigatório();"; class="form-control" name="id_contrato" id="contrato_slc">
 									<option></option>
 									<?php
-										foreach($contratos as $index=>$key){
+                                        foreach($contratos as $index=>$key){
 
-											$id = $key['id_contrato'];
-											$nome = $key['nome'];
+                                            $id = $key['id_contrato'];
+                                            $nome = $key['nome'];
 
-											if($id == $proposta['id_contrato']){
-												echo "<option selected value='$id'>$nome</option>";
-											}else{
-												echo "<option value='$id'>$nome</option>";
-											}
+                                            if($id == $proposta['id_contrato']){
+                                                echo "<option selected value='$id'>$nome</option>";
+                                            }else{
+                                                echo "<option value='$id'>$nome</option>";
+                                            }
 
-										}
-									?>
+                                        }
+                                    ?>
 								</select>
 							</div>-->
 
@@ -268,7 +268,7 @@
 									Nome:
 									<input class="form-control" required name="nome" placeholder="Nome do Documento Aqui." />
 								</div>
-								<?php if($proposta['ass']==0){ ?>
+								<?php if ($proposta['ass'] == 0) { ?>
 									<div class="col-md-2" style="display: none;">
 										Assinatura:
 										<select style="width: 100%" class="form-control select_normal" required name="ass">
@@ -290,20 +290,20 @@
 					</div>
 					<div class="panel-body">
 						<div class="content">
-							<?php foreach($documentos as $documento){ ?>
+							<?php foreach ($documentos as $documento) { ?>
 								<div class="row">
-									<?php if($documento['ass']==0){ ?>
+									<?php if ($documento['ass'] == 0) { ?>
 										<div class="col-md-12">
-											<?php /*if($dis_doc){*/ if(true){ ?>
+											<?php /*if($dis_doc){*/ if (true) { ?>
 												<a onclick="return confirm('Essa ação não pode ser desfeita! Tem certeza?')" class="btn-sm btn-danger" href="php/del_doc_proposta.php?id=<?= $documento['id'] ?>">X</a>
 											&nbsp;
 										<?php } ?>
-									<?php }else{ ?>
+									<?php } else { ?>
 										<div class="col-md-12">
 											<a style="color: white; cursor: pointer;" class="btn-sm btn-default">X</a>
 										&nbsp;
 									<?php } ?>
-										<a href="<?= substr($documento['documento'],3) ?>" target="_blank">
+										<a href="<?= substr($documento['documento'], 3) ?>" target="_blank">
 											<?= $documento['nome'] ?>
 										</a>
 									</div>

@@ -6,7 +6,7 @@ $info = $_GET;
 
 // print_r($info);
 if (@$info['motivo_baixa'] != '' && @$info['motivo_baixa'] != '<br>'){
-  $info['status'] =2;
+    $info['status'] =2;
 }
 $crud->pdo_edit('recibo', $info, 'id');
 
@@ -20,7 +20,7 @@ $crud->pdo_edit('recibo', $info, 'id');
   <script type="text/javascript">
   alert("Recibo baixado com sucesso!");
   </script>
-<?php }else{ ?>
+<?php } else{ ?>
   <script type="text/javascript">
   alert("Recibo editado com sucesso!");
   </script>

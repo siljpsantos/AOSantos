@@ -12,7 +12,7 @@ $info = $_POST;
 $crud->pdo_edit('funcionario_contrato', $info, 'id');
 //fim------------------------------
 
-$crud->query_void('UPDATE tb_funcionario SET id_contrato = 0 WHERE id = '.$info['id_funcionario']);
+$crud->query_void('UPDATE tb_funcionario SET id_contrato = 0 WHERE id = ' . $info['id_funcionario']);
 
 //retorna para a lista
 ?>

@@ -1,16 +1,16 @@
 <?php
 
-	//protege entrada sem permissão
-	if(@$_SESSION == array()){
-		echo "<script>window.location.href='" . HOME . "/403';</script>";
-	}else{
-		// if ($_SESSION['perm_frota'] == "1") {
-		// } else {
-		// 	echo "<script>window.location.href='" . HOME . "/403';</script>";
-		// }
-	}
+    //protege entrada sem permissão
+    if(@$_SESSION == array()){
+        echo "<script>window.location.href='" . HOME . "/403';</script>";
+    }else{
+        // if ($_SESSION['perm_frota'] == "1") {
+        // } else {
+        // 	echo "<script>window.location.href='" . HOME . "/403';</script>";
+        // }
+    }
 
-	$contrato = $crud->query_p('
+    $contrato = $crud->query_p('
 		SELECT
 			id_contrato, id_cliente, id_responsavel, nome, num_contrato, ini, fim, contato, logradouro, bairro, cidade, estado, cep,
 			UNCOMPRESS(claus_3) as claus_3,
@@ -25,36 +25,36 @@
 			id_proposta,
 			percent
 		FROM tb_contrato where id_contrato = '.
-	$_GET['id'])[0];
+    $_GET['id'])[0];
 
-	$loc = $crud->pdo_src('cliente','');
-	$usuarios = $crud->pdo_src('usuario', '');
-	$servicos = $crud->pdo_src('servico', 'WHERE id NOT IN ( SELECT id_servico FROM tb_contrato_servico WHERE id_contrato = '.$_GET['id'].' ) ');
-	$func = $crud->pdo_src('funcionario', 'WHERE id_contrato != '.$_GET['id']);
+    $loc = $crud->pdo_src('cliente','');
+    $usuarios = $crud->pdo_src('usuario', '');
+    $servicos = $crud->pdo_src('servico', 'WHERE id NOT IN ( SELECT id_servico FROM tb_contrato_servico WHERE id_contrato = '.$_GET['id'].' ) ');
+    $func = $crud->pdo_src('funcionario', 'WHERE id_contrato != '.$_GET['id']);
 
-	$contrato_servico = $crud->query_p('
+    $contrato_servico = $crud->query_p('
 		SELECT
 			s.servico, cs.val, cs.id
 		FROM
 			tb_contrato_servico cs
 			INNER JOIN tb_servico s ON s.id = cs.id_servico
 		WHERE
-			cs.id_contrato = '.$_GET['id'].'
+			cs.id_contrato = '.$_GET['id'] . '
 		ORDER BY s.id DESC
 	');
 
-	$func_contrato = $crud->query_p('
+    $func_contrato = $crud->query_p('
 		SELECT
 			f.nome, f.cpf, f.id as id_f, fc.data_hora_ini, fc.id as id_fc
 		FROM
 			tb_funcionario_contrato fc
 			INNER JOIN tb_funcionario f ON f.id = fc.id_funcionario
 		WHERE
-			fc.id_contrato = '.$_GET['id'].' AND fc.ativo_yn = 1
+			fc.id_contrato = '.$_GET['id'] . ' AND fc.ativo_yn = 1
 		ORDER BY fc.id DESC
 	');
 
-	$historico = $crud->query_p('
+    $historico = $crud->query_p('
 		SELECT
 			f.nome, f.cpf, fc.data_hora_ini, fc.data_hora_fin
 		FROM
@@ -65,23 +65,23 @@
 		ORDER BY fc.id DESC
 	');
 
-	// print_r($func_contrato);
+    // print_r($func_contrato);
 
-	if($contrato['id_proposta'] != 0){
-		$proposta = $crud->pdo_src('proposta', 'WHERE id = ' . $contrato['id_proposta'])[0];
-	}
+    if($contrato['id_proposta'] != 0){
+        $proposta = $crud->pdo_src('proposta', 'WHERE id = ' . $contrato['id_proposta'])[0];
+    }
 
-	$documentos = $crud->pdo_src('doc_contrato', 'WHERE id_contrato = '.$_GET['id']);
+    $documentos = $crud->pdo_src('doc_contrato', 'WHERE id_contrato = '.$_GET['id']);
 
-	// print_r($contrato);
+    // print_r($contrato);
 
-	if(true){
-		echo '<script>
+    if(true){
+        echo '<script>
 			$( document ).ready(function() {
 			    $(":input").prop("disabled", true);
 			});
 		</script>';
-	}
+    }
 
 ?>
 
@@ -103,19 +103,19 @@
 							<select style="width: 100%;" class="form-control" required name="id_responsavel">
 								<option></option>
 								<?php
-									foreach($usuarios as $index=>$key){
+                                    foreach($usuarios as $index=>$key){
 
-										$id = $key['id_usuario'];
-										$nome = $key['nome_usuario'];
+                                        $id = $key['id_usuario'];
+                                        $nome = $key['nome_usuario'];
 
-										if($id == $contrato['id_responsavel']){
-											echo "<option selected value='$id'>$nome</option>";
-										}else{
-											echo "<option value='$id'>$nome</option>";
-										}
+                                        if($id == $contrato['id_responsavel']){
+                                            echo "<option selected value='$id'>$nome</option>";
+                                        }else{
+                                            echo "<option value='$id'>$nome</option>";
+                                        }
 
-									}
-								?>
+                                    }
+                                ?>
 							</select>
 						</div>
 						<div class="col-md-3">
@@ -123,19 +123,19 @@
 							<select style="width: 100%;" class="form-control" required name="id_cliente">
 								<option></option>
 								<?php
-									foreach($loc as $index=>$key){
+                                    foreach($loc as $index=>$key){
 
-										$id = $key['id'];
-										$nome = $key['nome'];
+                                        $id = $key['id'];
+                                        $nome = $key['nome'];
 
-										if($id == $contrato['id_cliente']){
-											echo "<option selected value='$id'>$nome</option>";
-										}else{
-											echo "<option value='$id'>$nome</option>";
-										}
+                                        if($id == $contrato['id_cliente']){
+                                            echo "<option selected value='$id'>$nome</option>";
+                                        }else{
+                                            echo "<option value='$id'>$nome</option>";
+                                        }
 
-									}
-								?>
+                                    }
+                                ?>
 							</select>
 						</div>
 						<div class="col-md-3">
@@ -161,8 +161,8 @@
 						<div class="col-md-3">
 							<label>Percentual:</label>
 							<select style="width: 100%;" class="form-control" required name="percent">
-								<option <?= $contrato['percent']=="30.00" ? "selected" : ""  ?> value="30">30%</option>
-								<option <?= $contrato['percent']=="35.00" ? "selected" : ""  ?> value="35">35%</option>
+								<option <?= $contrato['percent'] == "30.00" ? "selected" : ""  ?> value="30">30%</option>
+								<option <?= $contrato['percent'] == "35.00" ? "selected" : ""  ?> value="35">35%</option>
 							</select>
 						</div>
 
@@ -242,10 +242,10 @@
 				<div class="row">
 					<div class="col-md-5"></div>
 					<div class="col-md-6">
-						<?php if($contrato['id_proposta'] != 0){ ?>
+						<?php if ($contrato['id_proposta'] != 0) { ?>
 							<a onclick="window.open('edita_proposta?id=<?= $contrato['id_proposta'] ?>');" style="cursor: pointer; float: right; margin-left: 10px;" class="btn btn-warning">Visualizar proposta</a>
 							<div style="float: right; margin-right: 30px;"><a target="_blank" class="btn btn-success" href="impr_contrato?id=<?= $_GET['id'] ?>">Imprimir Contrato</a></div>
-						<?php }else{ ?>
+						<?php } else { ?>
 							<div style="float: right;"><a class="btn btn-warning" disabled>Aguardando Aprovação de Proposta</a></div>
 						<?php } ?>
 					</div>
@@ -289,15 +289,15 @@
 									<select style="width: 100%;" class="form-control" required name="id_funcionario">
 										<option></option>
 										<?php
-											foreach($func as $index=>$key){
+                                            foreach($func as $index=>$key){
 
-												$id = $key['id'];
-												$nome = $key['cpf'] . " - " . $key['nome'];
+                                                $id = $key['id'];
+                                                $nome = $key['cpf'] . " - " . $key['nome'];
 
-												echo "<option value='$id'>$nome</option>";
+                                                echo "<option value='$id'>$nome</option>";
 
-											}
-										?>
+                                            }
+                                        ?>
 									</select>
 
 								</div>
@@ -329,11 +329,11 @@
 									</tr>
 								</thead>
 								<tbody>
-									<?php foreach($func_contrato as $key){ ?>
+									<?php foreach ($func_contrato as $key) { ?>
 										<tr>
 											<td><?= $key['nome'] ?></td>
 											<td><?= $key['cpf'] ?></td>
-											<td><?= implode("/",array_reverse(explode('-',explode(" ",$key['data_hora_ini'])[0]))) ?></td>
+											<td><?= implode("/", array_reverse(explode('-', explode(" ", $key['data_hora_ini'])[0]))) ?></td>
 											<td>
 												<form method="POST" class="form form-inline" action="php/remove_funcionario_contrato.php">
 													<input type="hidden" name="id" value="<?= $key['id_fc'] ?>" />
@@ -368,12 +368,12 @@
 									</tr>
 								</thead>
 								<tbody>
-									<?php foreach($historico as $key){ ?>
+									<?php foreach ($historico as $key) { ?>
 										<tr>
 											<td><?= $key['nome'] ?></td>
 											<td><?= $key['cpf'] ?></td>
-											<td><?= implode("/",array_reverse(explode('-',explode(" ",$key['data_hora_ini'])[0]))) ?></td>
-											<td><?= implode("/",array_reverse(explode('-',explode(" ",$key['data_hora_fin'])[0]))) ?></td>
+											<td><?= implode("/", array_reverse(explode('-', explode(" ", $key['data_hora_ini'])[0]))) ?></td>
+											<td><?= implode("/", array_reverse(explode('-', explode(" ", $key['data_hora_fin'])[0]))) ?></td>
 										</tr>
 									<?php } ?>
 								</tbody>
@@ -410,15 +410,15 @@
 									<select style="width: 100%;" class="form-control" required name="id_servico">
 										<option></option>
 										<?php
-											foreach($servicos as $index=>$key){
+                                            foreach($servicos as $index=>$key){
 
-												$id = $key['id'];
-												$nome = $key['servico'];
+                                                $id = $key['id'];
+                                                $nome = $key['servico'];
 
-												echo "<option value='$id'>$nome</option>";
+                                                echo "<option value='$id'>$nome</option>";
 
-											}
-										?>
+                                            }
+                                        ?>
 									</select>
 
 								</div>
@@ -445,7 +445,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<?php foreach($contrato_servico as $key){ ?>
+									<?php foreach ($contrato_servico as $key) { ?>
 										<tr>
 											<td><?= $key['servico'] ?></td>
 											<td>
@@ -501,7 +501,7 @@
 									Nome:
 									<input class="form-control" required name="nome" placeholder="Nome do Documento Aqui." />
 								</div>
-								<?php if($contrato['ass']==0){ ?>
+								<?php if ($contrato['ass'] == 0) { ?>
 									<div class="col-md-2">
 										Assinatura:
 										<select style="width: 100%" class="form-control" required name="ass">
@@ -524,26 +524,26 @@
 					</div>
 					<div class="panel-body">
 						<div class="content">
-							<?php foreach($documentos as $documento){ ?>
+							<?php foreach ($documentos as $documento) { ?>
 								<div class="row">
 									<div class="col-md-12">
-										<?php if($documento['ass']==0){ ?>
+										<?php if ($documento['ass'] == 0) { ?>
 											<a onclick="return confirm('Essa ação não pode ser desfeita! Tem certeza?')" class="btn-sm btn-danger" href="php/del_doc_contrato.php?id=<?= $documento['id'] ?>">X</a>
-										<?php }else{ ?>
+										<?php } else { ?>
 											<a style="color: white; cursor: pointer;" class="btn-sm btn-default">X</a>
 										<?php } ?>
 
 									<?php
-										/*if($documento['id_equipamento'] != "0"){
+                                        /*if($documento['id_equipamento'] != "0"){
 											$equip_tmp = $crud->pdo_src('equipamento', 'WHERE id_equipamento = '.$documento['id_equipamento']);
 
 											echo "<div class='col-md-1'>";
 											echo "<input disabled class='form-control' value='".$equip_tmp[0]['nome']."' />";
 											echo "</div>";
 										}*/
-									?>
+                                    ?>
 
-											&nbsp;<a href="<?= substr($documento['documento'],3) ?>" target="_blank">
+											&nbsp;<a href="<?= substr($documento['documento'], 3) ?>" target="_blank">
 											<?= $documento['nome'] ?>
 										</a>
 									</div>

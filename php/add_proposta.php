@@ -13,7 +13,7 @@ $info['data_criacao'] = $info['data_att'] = date('Y-m-d');
 $crud->pdo_cadastro('proposta', $info);
 //fim------------------------------
 
-$ultima_proposta = $crud->pdo_src('proposta','ORDER BY id DESC LIMIT 1')[0];
+$ultima_proposta = $crud->pdo_src('proposta', 'ORDER BY id DESC LIMIT 1')[0];
 
 //retorna para a lista
 ?>

@@ -1,23 +1,23 @@
 <?php
 
-	//protege entrada sem permissão
-	// if(@$_SESSION == array()){
-	// 	echo "<script>window.location.href='" . HOME . "/403';</script>";
-	// }else{
-	// 	if ($_SESSION['perm_ti'] == "1") {
-	// 	} else {
-	// 		echo "<script>window.location.href='" . HOME . "/403';</script>";
-	// 	}
-	// }
+    //protege entrada sem permissão
+    // if(@$_SESSION == array()){
+    // 	echo "<script>window.location.href='" . HOME . "/403';</script>";
+    // }else{
+    // 	if ($_SESSION['perm_ti'] == "1") {
+    // 	} else {
+    // 		echo "<script>window.location.href='" . HOME . "/403';</script>";
+    // 	}
+    // }
 
-	//$propostas = $crud->pdo_src('proposta', 'WHERE id_contrato = 0 AND del_yn != 1');
-	$propostas = $crud->query_p("
+    //$propostas = $crud->pdo_src('proposta', 'WHERE id_contrato = 0 AND del_yn != 1');
+    $propostas = $crud->query_p("
 	Select * from tb_cliente
 			");
 
 ?>
 <div style="margin: 0 10px 0 10px">
-		<?php if(@$_SESSION['bloq_ger_usuario']!="1"){ ?>
+		<?php if (@$_SESSION['bloq_ger_usuario'] != "1") { ?>
 			<div class="panel panel-default">
 				<div style="font-size: 14pt; display: table; width: 100%" class="panel-heading">
 					Clientes
@@ -52,30 +52,30 @@
 
 								<?php
 
-								foreach($propostas as $index=>$key){
+                                foreach($propostas as $index=>$key){
 
-									// echo '<pre>';
-									// print_r($key);
+                                    // echo '<pre>';
+                                    // print_r($key);
 
-									?>
+                                    ?>
 
 									<tr style=' border-bottom: 1px solid #ababab; cursor: pointer;'>
-										<td <?=  "onclick='window.open(\"edita_cliente?id=".$key['id']."\")' " ?>>
+										<td <?=  "onclick='window.open(\"edita_cliente?id=" . $key['id'] . "\")' " ?>>
 											<?php echo $key['nome'] ?>
 										</td>
-										<td <?=  "onclick='window.open(\"edita_cliente?id=".$key['id']."\")' " ?>>
+										<td <?=  "onclick='window.open(\"edita_cliente?id=" . $key['id'] . "\")' " ?>>
 											<?php echo $key['cnpj'] ?>
 										</td>
 
-										<td <?=  "onclick='window.open(\"edita_cliente?id=".$key['id']."\")' " ?>>
+										<td <?=  "onclick='window.open(\"edita_cliente?id=" . $key['id'] . "\")' " ?>>
 											<?php echo $key['email'] ?>
 										</td>
 
-									<td <?=  "onclick='window.open(\"edita_cliente?id=".$key['id']."\")' " ?>>
+									<td <?=  "onclick='window.open(\"edita_cliente?id=" . $key['id'] . "\")' " ?>>
 											<?php echo $key['inscricao_estadual'] ?>
 									</td>
-									<!-- <td <?=  "onclick='window.open(\"edita_cliente?id=".$key['id']."\")' " ?>>
-											<?php echo implode("/",array_reverse(explode("-",$key['usuario']))) ?>
+									<!-- <td <?=  "onclick='window.open(\"edita_cliente?id=" . $key['id'] . "\")' " ?>>
+											<?php echo implode("/", array_reverse(explode("-", $key['usuario']))) ?>
 										</td> -->
 									</tr>
 
@@ -86,7 +86,7 @@
 					</div>
 				</div>
 			</div>
-		<?php }else{ ?>
+		<?php } else { ?>
 			<div class="panel panel-default">
 				<div class="panel-heading"><center><h2>USUARIO SOMENTE PARA CADASTRO</h3></center></div>
 			</div>

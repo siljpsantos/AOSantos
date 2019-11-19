@@ -11,12 +11,12 @@ $ok = 0;
 include "up_doc_proposta.php";
 
 if($info['ass']==1){
-	$crud->query_void('UPDATE tb_proposta set ass = 1 WHERE id = '.$info['id_proposta']);
+    $crud->query_void('UPDATE tb_proposta set ass = 1 WHERE id = '.$info['id_proposta']);
 }
 
 //cadastra funcionario----------------
 if($ok = 1){
-	$crud->pdo_cadastro('doc_proposta', $info);
+    $crud->pdo_cadastro('doc_proposta', $info);
 }
 //fim------------------------------
 

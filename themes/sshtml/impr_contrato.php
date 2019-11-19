@@ -1,11 +1,11 @@
  <?php
 
-  $encoding = mb_internal_encoding();
+    $encoding = mb_internal_encoding();
 
-  date_default_timezone_set('America/Sao_Paulo');
-  $data_atual = date('Y-m-d');
+    date_default_timezone_set('America/Sao_Paulo');
+    $data_atual = date('Y-m-d');
 
-  $contrato = $crud->query_p('
+    $contrato = $crud->query_p('
   SELECT cli.nome as nome,
          cli.cnpj as cnpj,
          cli.inscricao_estadual as inscricao_estadual,
@@ -29,13 +29,13 @@
   inner join tb_cliente cli on cli.id = cont.id_cliente
   left join tb_contrato_servico cs on cs.id_contrato = cont.id_contrato
   left join tb_servico s on s.id = cs.id_servico
-  WHERE cont.id_contrato = '.$_GET['id'].'');
+  WHERE cont.id_contrato = '.$_GET['id'] . '');
 
-  $tot = 0.00;
+    $tot = 0.00;
 
 ?>
 <!-- <?php echo "<pre>";
- print_r($contrato); ?> -->
+    print_r($contrato); ?> -->
 <div style="position: fixed; z-index: 1000; width: 100%; height: 100%; background-color: white;">
 </div>
 <style>
@@ -148,7 +148,7 @@ tfoot{
         </p>
         <p>
           <strong>
-              CONTRATANTE:  <?= $contrato[0]['nome'] ?> , situada <?= $contrato[0]['estado'] ?>, com sede na <?= $contrato[0]['logradouro'] . ", " . $contrato[0]['bairro'] . ", " .  $contrato[0]['cidade'] . " - . CEP: " .  $contrato[0]['cep'] ?>, CNPJ
+              CONTRATANTE:  <?= $contrato[0]['nome'] ?> , situada <?= $contrato[0]['estado'] ?>, com sede na <?= $contrato[0]['logradouro'] . ", " . $contrato[0]['bairro'] . ", " . $contrato[0]['cidade'] . " - . CEP: " . $contrato[0]['cep'] ?>, CNPJ
               <?= $contrato[0]['cnpj'] ?>, Inscr. Est.<?= $contrato[0]['inscricao_estadual'] ?>, representada por <?= $contrato[0]['contato'] ?>.
           </strong>
         </p>
@@ -226,9 +226,9 @@ tfoot{
                   </td>
               </tr>
               <?php
-              foreach($contrato as $item){
+                foreach($contrato as $item){
 
-              ?>
+                ?>
               <tr style="border:1px solid #000;">
                   <td style="border:1px solid #000; text-align:center;" width="288" valign="top">
                       <p>
@@ -238,7 +238,7 @@ tfoot{
                   </td>
                   <td style="border:1px solid #000; text-align:center;" width="288" valign="top">
                       <p>
-                          R$<?= number_format($item['preco'],2,",",".") ?>
+                          R$<?= number_format($item['preco'], 2, ",", ".") ?>
                           <!-- Variavel -->
                       </p>
                   </td>

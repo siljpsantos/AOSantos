@@ -9,7 +9,7 @@ $dir = explode(DIRECTORY_SEPARATOR, getcwd());
 if (end($dir) == 'php') {
     include "./querys.php";
     $var_json = file_get_contents('../_app/var.json');
-}else if (end($dir) == 'ajax') {
+} else if (end($dir) == 'ajax') {
     include "../querys.php";
     $var_json = file_get_contents('../../_app/var.json');
 } else {

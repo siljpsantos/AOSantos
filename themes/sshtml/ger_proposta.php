@@ -1,24 +1,24 @@
 <?php
 
-	//protege entrada sem permissão
-	if(@$_SESSION == array()){
-		echo "<script>window.location.href='" . HOME . "/403';</script>";
-	}else{
-		// if ($_SESSION['perm_frota'] == "1") {
-		// } else {
-		// 	echo "<script>window.location.href='" . HOME . "/403';</script>";
-		// }
-	}
+    //protege entrada sem permissão
+    if(@$_SESSION == array()){
+        echo "<script>window.location.href='" . HOME . "/403';</script>";
+    }else{
+        // if ($_SESSION['perm_frota'] == "1") {
+        // } else {
+        // 	echo "<script>window.location.href='" . HOME . "/403';</script>";
+        // }
+    }
 
-	//$propostas = $crud->pdo_src('proposta', 'WHERE id_contrato = 0 AND del_yn != 1');
-	$propostas = $crud->query_p("
+    //$propostas = $crud->pdo_src('proposta', 'WHERE id_contrato = 0 AND del_yn != 1');
+    $propostas = $crud->query_p("
 		SELECT p.*
 		FROM tb_proposta p WHERE p.id_contrato = 0 AND p.del_yn != 1
 	");
 
 ?>
 <div style="margin: 0 10px 0 10px">
-		<?php if(@$_SESSION['bloq_ger_usuario']!="1"){ ?>
+		<?php if (@$_SESSION['bloq_ger_usuario'] != "1") { ?>
 			<div class="panel panel-default">
 				<div style="font-size: 14pt; display: table; width: 100%" class="panel-heading">
 					Propostas em Aberto
@@ -38,7 +38,7 @@
 									<th>
 										Status
 									</th>
-									<?php if($_SESSION['id_usuario'] =="1" || $_SESSION['id_usuario'] =="16" || $_SESSION['id_usuario'] =="20"){ ?>
+									<?php if ($_SESSION['id_usuario'] == "1" || $_SESSION['id_usuario'] == "16" || $_SESSION['id_usuario'] == "20") { ?>
 									<th>
 										USUÁRIO
 									</th>
@@ -46,7 +46,7 @@
 									<!--<th>
 										Contrato
 									</th>-->
-									<?php if($_SESSION['id_usuario'] =="1" || $_SESSION['id_usuario'] =="16" || $_SESSION['id_usuario'] =="20"){ ?>
+									<?php if ($_SESSION['id_usuario'] == "1" || $_SESSION['id_usuario'] == "16" || $_SESSION['id_usuario'] == "20") { ?>
 									<th style="white-space: nowrap; width: 50px;">
 										OP
 									</th>
@@ -57,17 +57,17 @@
 
 								<?php
 
-								foreach($propostas as $index=>$key){
+                                foreach($propostas as $index=>$key){
 
-									$usuario = $crud->pdo_src('usuario', 'WHERE id_usuario = ' . $key['id_usuario'] . ' ');
+                                    $usuario = $crud->pdo_src('usuario', 'WHERE id_usuario = ' . $key['id_usuario'] . ' ');
 
-									$del = "";
-									$del_u = "php/del_proposta.php?id=" . $key['id'];
-									$confirm = " onclick=\"return confirm('Tem certeza disto?')\" ";
+                                    $del = "";
+                                    $del_u = "php/del_proposta.php?id=" . $key['id'];
+                                    $confirm = " onclick=\"return confirm('Tem certeza disto?')\" ";
 
-									$del_str = "<a $confirm href=\"$del_u\" $del class=\"btn btn-danger\">X</a>";
+                                    $del_str = "<a $confirm href=\"$del_u\" $del class=\"btn btn-danger\">X</a>";
 
-									?>
+                                    ?>
 
 									<tr style=' border-bottom: 1px solid #ababab; cursor: pointer;'>
 										<td <?=  "onclick='window.open(\"edita_proposta?id=".$key['id']."\")' " ?>>
@@ -78,12 +78,12 @@
 										</td>
 										<td <?=  "onclick='window.open(\"edita_proposta?id=".$key['id']."\")' " ?>>
 											<?php
-												if($key['ass']=="1"){
-													echo "Aceita / Aguardando Contrato";
-												}else{
-													echo "Em aberto / Aguardando Aceite";
-												}
-											?>
+                                                if($key['ass']=="1"){
+                                                    echo "Aceita / Aguardando Contrato";
+                                                }else{
+                                                    echo "Em aberto / Aguardando Aceite";
+                                                }
+                                            ?>
 										</td>
 										<?php if($_SESSION['id_usuario'] =="1" || $_SESSION['id_usuario'] =="16" || $_SESSION['id_usuario'] =="20"){ ?>
 									<td <?=  "onclick='window.open(\"edita_proposta?id=".$key['id']."\")' " ?>>
@@ -94,10 +94,10 @@
 											<?php echo @$contrato['nome'] ?>
 										</td>-->
 										<?php
-										if($_SESSION['id_usuario'] =="1" || $_SESSION['id_usuario'] =="16" || $_SESSION['id_usuario'] =="20"){
-												echo "<td>$del_str</td>";
-											}
-										?>
+                                        if($_SESSION['id_usuario'] =="1" || $_SESSION['id_usuario'] =="16" || $_SESSION['id_usuario'] =="20"){
+                                                echo "<td>$del_str</td>";
+                                            }
+                                        ?>
 									</tr>
 
 								<?php } ?>
@@ -107,7 +107,7 @@
 					</div>
 				</div>
 			</div>
-		<?php }else{ ?>
+		<?php } else { ?>
 			<div class="panel panel-default">
 				<div class="panel-heading"><center><h2>USUARIO SOMENTE PARA CADASTRO</h3></center></div>
 			</div>

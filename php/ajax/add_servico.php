@@ -10,9 +10,9 @@ $servico = $crud->pdo_src('servico', 'WHERE id = '.$info['id_servico'])[0];
 $servico_contrato = $crud->pdo_src('contrato_servico', 'WHERE id_contrato = '.$recibo['id_contrato'].' AND id_servico = '.$info['id_servico']);
 
 if($servico_contrato == array()){
-  $valor = $servico['preco'];
+    $valor = $servico['preco'];
 }else{
-  $valor = $servico_contrato[0]['val'];
+    $valor = $servico_contrato[0]['val'];
 }
 
 $crud->query_void('UPDATE tb_recibo SET

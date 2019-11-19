@@ -19,44 +19,44 @@ $contratos = $crud->pdo_src('contrato', 'WHERE id_responsavel = '.$_SESSION['id_
 
 $servicos = array();
 for($i=1;$i<=10;$i++){
-  if($recibo['servico_'.$i] != 0){
+    if($recibo['servico_'.$i] != 0){
     $servicos[] = $i;
-  }
+    }
 }
 $servicos = implode(",",$servicos);
 
 $servicos_t = $crud->pdo_src('servico', "");
 
 if($servicos != ""){
-  $servicos = $crud->pdo_src('servico', "WHERE id NOT IN ($servicos)");
+    $servicos = $crud->pdo_src('servico', "WHERE id NOT IN ($servicos)");
 }else{
-  $servicos = $crud->pdo_src('servico', "");
+    $servicos = $crud->pdo_src('servico', "");
 }
 
 $dis = "";
 if($recibo['status'] >= 1){
-  $dis = "disabled";
+    $dis = "disabled";
 }
 echo'<script>$("#faturar_btn").show();</script>';
 echo'<script>$("#motivo_baixa").hide();</script>';
 $dis2 = "";
 if($recibo['status'] == 2){
-  $dis2 = "disabled";
-  echo'<script>$("#baixar_btn").hide();</script>';
-  echo'<script>$("#motivo_baixa").show();</script>';
+    $dis2 = "disabled";
+    echo'<script>$("#baixar_btn").hide();</script>';
+    echo'<script>$("#motivo_baixa").show();</script>';
 }
 
 $nobl ="block";
 if($recibo['status'] >= 1){
-  echo'<script>$("#faturar_btn").hide();</script>';
-  $nobl="none";
+    echo'<script>$("#faturar_btn").hide();</script>';
+    $nobl="none";
 }
 
 // print_r($recibos);
 $status = array(
-  0 => "Em aberto",
-  1 => "Faturado",
-  2 => "Baixado"
+    0 => "Em aberto",
+    1 => "Faturado",
+    2 => "Baixado"
 );
 
 $status_l = $status[$recibo['status']];
@@ -89,15 +89,15 @@ $status_l = $status[$recibo['status']];
          <select style="width: 100%" disabled class="form-control" name="id_contrato" >
              <option></option>
              <?php
-             foreach ($contratos as $key) {
-                 $id = $key['id_contrato'];
-                 $nome = $key['nome'];
-                 if($id == $recibo['id_contrato']){
-                   echo "<option selected value=$id>$nome</option>";
-                 }
+                foreach ($contratos as $key) {
+                    $id = $key['id_contrato'];
+                    $nome = $key['nome'];
+                    if($id == $recibo['id_contrato']){
+                    echo "<option selected value=$id>$nome</option>";
+                    }
 
-             }
-             ?>
+                }
+                ?>
          </select>
        </div>
        <div class="col-md-3">
@@ -137,19 +137,19 @@ $status_l = $status[$recibo['status']];
        </div>
 
        <?php
-       $serv = false;
-       for($i=1;$i<=10;$i++){
+        $serv = false;
+        for($i=1;$i<=10;$i++){
 
-         $label = "servico_$i";
-         $label_val = "val_servico_$i";
-         if($recibo[$label] != '0'){
+            $label = "servico_$i";
+            $label_val = "val_servico_$i";
+            if($recibo[$label] != '0'){
 
-           foreach($servicos_t as $key){
-             if($key['id'] == $i){
-               $servico_txt = $key['servico'];
-             }
-           }
-           $serv = true;
+            foreach($servicos_t as $key){
+                if($key['id'] == $i){
+                $servico_txt = $key['servico'];
+                }
+            }
+            $serv = true;
 
         ?>
         <div class="col-md-2 text-left">
@@ -160,17 +160,17 @@ $status_l = $status[$recibo['status']];
         </div>
         <?php
 
-         }
-       }
+            }
+        }
 
-       if($serv==false){
-         ?>
+        if($serv==false){
+            ?>
          <div class="col-md-12">
            <input class="form-control" disabled value="Nenhum serviço registrado."  />
          </div>
         <?php
-       }
-       ?>
+        }
+        ?>
 
       </div>
     </form>
@@ -185,13 +185,13 @@ $status_l = $status[$recibo['status']];
        <select <?= $dis ?> class="form-control" id="new_servico_slc">
          <option></option>
          <?php
-         foreach ($servicos as $key) {
-             $id = $key['id'];
-             $nome = $key['servico'];
-             echo "<option value=$id>$nome</option>";
+            foreach ($servicos as $key) {
+                $id = $key['id'];
+                $nome = $key['servico'];
+                echo "<option value=$id>$nome</option>";
 
-         }
-         ?>
+            }
+            ?>
        </select>
      </div>
      <div class="col-md-2 text-left">

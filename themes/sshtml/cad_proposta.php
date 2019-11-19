@@ -1,34 +1,34 @@
 <?php
 
-	//protege entrada sem login
-	if(@$_SESSION != array()){
-		// if(@$_SESSION['perm_frota'] == "1"){
-		//
-		// }else{
-		// 	echo "<script>window.location.href='403';</script>";
-		// }
-	}else{
-		echo "<script>window.location.href='index.php';</script>";
-	}
+    //protege entrada sem login
+    if(@$_SESSION != array()){
+        // if(@$_SESSION['perm_frota'] == "1"){
+        //
+        // }else{
+        // 	echo "<script>window.location.href='403';</script>";
+        // }
+    }else{
+        echo "<script>window.location.href='index.php';</script>";
+    }
 
-	$loc = $crud->pdo_src('cliente', '');
-	//calcula numero da proposta
-	@$n_proposta = $crud->query_p('SELECT num_proposta as num FROM tb_proposta WHERE YEAR(data_criacao) = 2019 ');
+    $loc = $crud->pdo_src('cliente', '');
+    //calcula numero da proposta
+    @$n_proposta = $crud->query_p('SELECT num_proposta as num FROM tb_proposta WHERE YEAR(data_criacao) = 2019 ');
 
-	$props = array();
-	foreach($n_proposta as $key){
-		$props[] = explode("/",$key[0])[0];
-	}
-	$prop = max($props);
+    $props = array();
+    foreach($n_proposta as $key){
+        $props[] = explode("/",$key[0])[0];
+    }
+    $prop = max($props);
 
-	/*echo "<pre>";
+    /*echo "<pre>";
 	print_r($prop);
 	echo "</pre>";*/
 
 
-	@$prox_proposta = $prop + 1;
+    @$prox_proposta = $prop + 1;
 
-	$n_proposta = sprintf('%04d', $prox_proposta) . "/" . substr(date('y'),0);
+    $n_proposta = sprintf('%04d', $prox_proposta) . "/" . substr(date('y'),0);
 
 ?>
 <div style="margin: 0 10px 0 10px">
@@ -67,19 +67,19 @@
 						<select class="form-control" required name="id_cliente">
 							<option></option>
 							<?php
-								foreach($loc as $index=>$key){
+                                foreach($loc as $index=>$key){
 
-									$id = $key['id'];
-									$nome = $key['nome'];
+                                    $id = $key['id'];
+                                    $nome = $key['nome'];
 
-									if($id == $proposta['id_cliente']){
-										echo "<option selected value='$id'>$nome</option>";
-									}else{
-										echo "<option value='$id'>$nome</option>";
-									}
+                                    if($id == $proposta['id_cliente']){
+                                        echo "<option selected value='$id'>$nome</option>";
+                                    }else{
+                                        echo "<option value='$id'>$nome</option>";
+                                    }
 
-								}
-							?>
+                                }
+                            ?>
 						</select>
 					</div>
 

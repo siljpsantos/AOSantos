@@ -8,7 +8,7 @@
 	
     if ($usuario[0]['ativo_usuario'] == "1") {
         $status = "0";
-    }else {
+    } else {
         $status = "1";
     }
 	

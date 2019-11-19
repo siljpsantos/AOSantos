@@ -1,5 +1,5 @@
 <?php
-  $nivel_adm    = @$_SESSION['nivel_usuario'] == "adm" ? ""   : " class=\"disabled\" ";
+    $nivel_adm    = @$_SESSION['nivel_usuario'] == "adm" ? ""   : " class=\"disabled\" ";
 ?>
 <style>
 .dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;        -webkit-transition: height 0.5s linear .4s; transition: height 0.5s linear .4s;}
