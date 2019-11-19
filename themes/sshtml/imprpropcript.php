@@ -13,7 +13,7 @@ $proposta = $crud->query_p("
   c.nome as nome_cliente
   FROM tb_proposta p
   INNER JOIN tb_cliente c ON c.id = p.id_cliente
-  WHERE p.id = ".$_GET['id']."
+  WHERE p.id = ".$_GET['id'] . "
   ")[0];
 
 

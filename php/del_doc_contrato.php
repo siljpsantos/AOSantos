@@ -8,7 +8,7 @@ $info = $_GET;
 //print_r($info);
 
 //cadastra funcionario----------------
-$crud->query_void('delete from tb_doc_contrato WHERE id = '.$info['id']);
+$crud->query_void('delete from tb_doc_contrato WHERE id = ' . $info['id']);
 //fim------------------------------
 
 //retorna para a lista

@@ -13,7 +13,7 @@ $proposta = $crud->query_p("
   c.nome as nome_cliente
   FROM tb_proposta p
   INNER JOIN tb_cliente c ON c.id = p.id_cliente
-  WHERE p.id = ".$_GET['id']."
+  WHERE p.id = ".$_GET['id'] . "
   ")[0];
 
 $cliente = $crud->pdo_src('cliente', 'WHERE id = ' . $proposta['id_cliente'])[0];
@@ -44,7 +44,7 @@ $mail->Port       = 465;                                    // TCP port to conne
 $mail->setFrom('sistema@aosantos.com.br', 'AO Santos');
 $mail->addReplyTo('sistema@aosantos.com.br', 'AO Santos');
 
- // $mail->addAddress('desenvolvimento@inforway.com', 'TESTE');     // Add a recipient
+    // $mail->addAddress('desenvolvimento@inforway.com', 'TESTE');     // Add a recipient
 $mail->addAddress($cliente['email'], $cliente['nome']);     // Add a recipient
 
 //$mail->addAddress('backup@zmbequipamentos.com.br', 'Webmaster');          // Add a recipient
@@ -90,7 +90,7 @@ $mensagem = utf8_decode('
 							<td align="center" style="padding: 0 0 0 0">
 								<p><b>Sua proposta comercial pode ser impressa / salva através do link:</b></p>
 								<br/>
-								<a target=_blank href='.$link.'>
+								<a target=_blank href='.$link . '>
 								<img style="display: block;" src="http://aosantos.com.br/sistema/themes/sshtml/img/botao.png" alt="botao" />
 								</a>
 							</td>
@@ -155,9 +155,9 @@ $mail->Body    = $mensagem;
 $mail->AltBody = $mensagem;
 
 if(!$mail->send()) {
-	echo "Erro no envio: " . $mail->ErrorInfo;
+    echo "Erro no envio: " . $mail->ErrorInfo;
 } else {
-  ?>
+    ?>
   <script type="text/javascript">
   alert("Orçamento / Proposta enviada com sucesso!");
   window.close();

@@ -1,8 +1,8 @@
 <?php
-	//protege entrada sem login
-	if(@$_SESSION == array()){
-		echo "<script>window.location.href='index.php';</script>";
-	}
+    //protege entrada sem login
+    if(@$_SESSION == array()){
+        echo "<script>window.location.href='index.php';</script>";
+    }
 ?>
 <div style="margin: 0 10px 0 10px">
 		<div class="panel panel-default">

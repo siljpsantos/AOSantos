@@ -1,6 +1,6 @@
 <?php
 
-function XML2Array(SimpleXMLElement $parent){
+function XML2Array(SimpleXMLElement $parent) {
     $array = array();
 
     foreach ($parent as $name => $element) {
@@ -16,18 +16,18 @@ function XML2Array(SimpleXMLElement $parent){
 
 function recur($array, $key='', &$retorno){
 
-	if (is_array($array)){
+    if (is_array($array)){
 
-		foreach($array as $key => $element){
+        foreach($array as $key => $element){
 
-			recur($element, $key, $retorno);   
+            recur($element, $key, $retorno);   
 
-		}
+        }
 
-	} else {
+    } else {
 
-		$retorno[0][] = $key;
-		$retorno[1][] = $array;
-	}
+        $retorno[0][] = $key;
+        $retorno[1][] = $array;
+    }
 
 } 

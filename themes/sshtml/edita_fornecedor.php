@@ -1,11 +1,11 @@
 <?php
 
-	//protege entrada sem login
-	if(@$_SESSION == array()){
-		echo "<script>window.location.href='index.php';</script>";
-	}
+    //protege entrada sem login
+    if(@$_SESSION == array()){
+        echo "<script>window.location.href='index.php';</script>";
+    }
 
-	$cliente = $crud->pdo_src('fornecedor','WHERE id = '.$_GET['id'])[0];
+    $cliente = $crud->pdo_src('fornecedor','WHERE id = '.$_GET['id'])[0];
 
 ?>
 <div style="margin: 0 10px 0 10px">

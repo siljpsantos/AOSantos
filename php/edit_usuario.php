@@ -37,7 +37,7 @@ $info = $_POST;
 //
 // unset($info['perm_os_1']);
 
-$crud->pdo_edit('usuario',$info,'id_usuario');
+$crud->pdo_edit('usuario', $info, 'id_usuario');
 
 if ($_SESSION['nivel_usuario'] == 'adm') {
     echo "<script>alert('Usuário atualizado com sucesso!');window.location.href='" . HOME . "/ger_user';</script>";

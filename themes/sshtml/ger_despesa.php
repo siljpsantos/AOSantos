@@ -1,26 +1,26 @@
 <?php
 
-	//protege entrada sem permissão
-	if(@$_SESSION == array()){
-		echo "<script>window.location.href='" . HOME . "/403';</script>";
-	}else{
-		// if ($_SESSION['perm_ti'] == "1") {
-		// } else {
-		// 	echo "<script>window.location.href='" . HOME . "/403';</script>";
-		// }
-	}
+    //protege entrada sem permissão
+    if(@$_SESSION == array()){
+        echo "<script>window.location.href='" . HOME . "/403';</script>";
+    }else{
+        // if ($_SESSION['perm_ti'] == "1") {
+        // } else {
+        // 	echo "<script>window.location.href='" . HOME . "/403';</script>";
+        // }
+    }
 
-	if($nivel_adm){
+    if($nivel_adm){
 
-		if($perm_f){
-			$contratos = $crud->pdo_src('contrato', 'WHERE id_contrato = 3');
-		}else{
-			$contratos = $crud->pdo_src('contrato', '');
-		}
+        if($perm_f){
+            $contratos = $crud->pdo_src('contrato', 'WHERE id_contrato = 3');
+        }else{
+            $contratos = $crud->pdo_src('contrato', '');
+        }
 
-	}else{
-			$contratos = $crud->pdo_src('contrato', 'WHERE id_responsavel = '.$_SESSION['id_usuario']);
-	}
+    }else{
+            $contratos = $crud->pdo_src('contrato', 'WHERE id_responsavel = '.$_SESSION['id_usuario']);
+    }
 
 ?>
 
@@ -49,12 +49,12 @@
 									<select style="width: 100%" required class="form-control" name="id_contrato">
 											<option></option>
 											<?php
-											foreach ($contratos as $key) {
-													$id = $key['id_contrato'];
-													$nome = $key['nome'];
-													echo "<option value=$id>$nome</option>";
-											}
-											?>
+                                            foreach ($contratos as $key) {
+                                                    $id = $key['id_contrato'];
+                                                    $nome = $key['nome'];
+                                                    echo "<option value=$id>$nome</option>";
+                                            }
+                                            ?>
 									</select>
 								</div>
 
@@ -232,17 +232,17 @@
 					<select required class="form-control" id="select_contrato" name="id_contrato" onchange="buscar_despesas();">
 						<option></option>
 						<?php
-						foreach($contratos as $key){
-							$id = $key['id_contrato'];
-							$nome = $key['nome'];
+                        foreach($contratos as $key){
+                            $id = $key['id_contrato'];
+                            $nome = $key['nome'];
 
-							// if($id == $proposta['id_cargo']){
-							// 	echo "<option selected value=$id>$nome</option>";
-							// }else{
-								echo "<option value=$id>$nome</option>";
-							// }
-						}
-						?>
+                            // if($id == $proposta['id_cargo']){
+                            // 	echo "<option selected value=$id>$nome</option>";
+                            // }else{
+                                echo "<option value=$id>$nome</option>";
+                            // }
+                        }
+                        ?>
 					</select>
 				</div>
 				<div class="col-md-2">

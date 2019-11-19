@@ -9,7 +9,7 @@ $info = $_POST;
 // exit();
 
 //cadastra funcionario----------------
-$crud->query_void('delete from tb_contrato_servico WHERE id = '.$info['id']);
+$crud->query_void('delete from tb_contrato_servico WHERE id = ' . $info['id']);
 //fim------------------------------
 
 //retorna para a lista

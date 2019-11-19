@@ -1,21 +1,21 @@
 <?php
 
-	//protege entrada sem permissão
-	if(@$_SESSION == array()){
-		echo "<script>window.location.href='" . HOME . "/403';</script>";
-	}else{
-		// if ($_SESSION['perm_ti'] == "1") {
-		// } else {
-		// 	echo "<script>window.location.href='" . HOME . "/403';</script>";
-		// }
-	}
+    //protege entrada sem permissão
+    if(@$_SESSION == array()){
+        echo "<script>window.location.href='" . HOME . "/403';</script>";
+    }else{
+        // if ($_SESSION['perm_ti'] == "1") {
+        // } else {
+        // 	echo "<script>window.location.href='" . HOME . "/403';</script>";
+        // }
+    }
 
- $proposta = $crud->pdo_src('funcionario', 'WHERE id = '.$_GET['id'])[0];
- $documentos = $crud->pdo_src('doc_funcionario', 'WHERE id_funcionario = '.$_GET['id']);
- $fotos = $crud->pdo_src('foto_funcionario', 'WHERE id_funcionario = '.$_GET['id']);
- $cargos = $crud->pdo_src('cargo', 'ORDER BY cargo');
+    $proposta = $crud->pdo_src('funcionario', 'WHERE id = '.$_GET['id'])[0];
+    $documentos = $crud->pdo_src('doc_funcionario', 'WHERE id_funcionario = '.$_GET['id']);
+    $fotos = $crud->pdo_src('foto_funcionario', 'WHERE id_funcionario = '.$_GET['id']);
+    $cargos = $crud->pdo_src('cargo', 'ORDER BY cargo');
 
- $historico = $crud->query_p('
+    $historico = $crud->query_p('
 	 SELECT
 		 c.nome, fc.data_hora_ini, fc.data_hora_fin
 	 FROM
@@ -26,7 +26,7 @@
 	 ORDER BY fc.id DESC
  ');
 
- $contrato = $crud->pdo_src('contrato', 'WHERE id_contrato = '.$proposta['id_contrato']);
+    $contrato = $crud->pdo_src('contrato', 'WHERE id_contrato = '.$proposta['id_contrato']);
 
 ?>
 
@@ -35,15 +35,15 @@
 		Informações do Funcionário
 		<span style="float: right;">
 			<?php
-			if($contrato != array()){
-				?>
+            if($contrato != array()){
+                ?>
 				Contrato Atual: <?= $contrato[0]['nome'] ?>
 				<a target='_blank' class='btn-sm btn-primary' href='edita_contrato?id=<?= $proposta['id_contrato'] ?>'>
 					ir
 				</a>
 				<?php
-			}
-			?>
+            }
+            ?>
 		<span>
 	</div>
 	<div class="panel-body">
@@ -75,18 +75,18 @@
 									<select required class="form-control select_normal" name="id_cargo">
 											<option></option>
 											<?php
-											foreach ($cargos as $key) {
-													$id = $key['id'];
-													$nome = $key['cargo'];
+                                            foreach ($cargos as $key) {
+                                                    $id = $key['id'];
+                                                    $nome = $key['cargo'];
 
-													if($id == $proposta['id_cargo']){
-														echo "<option selected value=$id>$nome</option>";
-													}else{
-														echo "<option value=$id>$nome</option>";
-													}
+                                                    if($id == $proposta['id_cargo']){
+                                                        echo "<option selected value=$id>$nome</option>";
+                                                    }else{
+                                                        echo "<option value=$id>$nome</option>";
+                                                    }
 
-											}
-											?>
+                                            }
+                                            ?>
 									</select>
 							</div>
 						<div class="col-md-3">
@@ -171,11 +171,11 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach($historico as $key){ ?>
+					<?php foreach ($historico as $key) { ?>
 						<tr>
 							<td><?= $key['nome'] ?></td>
-							<td><?= implode("/",array_reverse(explode('-',explode(" ",$key['data_hora_ini'])[0]))) ?></td>
-							<td><?= implode("/",array_reverse(explode('-',explode(" ",$key['data_hora_fin'])[0]))) ?></td>
+							<td><?= implode("/", array_reverse(explode('-', explode(" ", $key['data_hora_ini'])[0]))) ?></td>
+							<td><?= implode("/", array_reverse(explode('-', explode(" ", $key['data_hora_fin'])[0]))) ?></td>
 						</tr>
 					<?php } ?>
 				</tbody>
@@ -225,11 +225,11 @@
 					</div>
 					<div class="panel-body">
 						<div class="content">
-							<?php foreach($documentos as $documento){ ?>
+							<?php foreach ($documentos as $documento) { ?>
 								<div class="row">
 										<div class="col-md-12">
 											<a onclick="return confirm('Essa ação não pode ser desfeita! Tem certeza?')" class="btn-sm btn-danger" href="php/del_doc_funcionario.php?id=<?= $documento['id'] ?>">X</a>
-											<a href="<?= substr($documento['documento'],3) ?>" target="_blank">
+											<a href="<?= substr($documento['documento'], 3) ?>" target="_blank">
 											<?= $documento['nome'] ?>
 										</a>
 									</div>
@@ -254,7 +254,7 @@
 		<div class="panel-body">
 			<div id="fotos" class="container-big collapse" style="margin: 10px;">
 
-				<?php if(!isset($fotos[0])){ ?>
+				<?php if (!isset($fotos[0])) { ?>
 					<div class="panel panel-success">
 						<div style="font-size: 14pt" class="panel-heading">
 							Adicionar Foto
@@ -285,12 +285,12 @@
 					</div>
 					<div class="panel-body">
 						<div class="content">
-							<?php foreach($fotos as $foto){ ?>
+							<?php foreach ($fotos as $foto) { ?>
 								<div class="col-md-3 text-center">
-									<a onclick="return confirm('Essa ação não pode ser desfeita! Tem certeza?')" class="btn-sm btn-danger" href="<?= $_SESSION['id_usuario'] =="1" || $_SESSION['id_usuario'] =="16" || $_SESSION['id_usuario'] =="20" ? "php/del_foto_funcionario.php?id=". $foto['id'] : "" ?>">Remover</a>
+									<a onclick="return confirm('Essa ação não pode ser desfeita! Tem certeza?')" class="btn-sm btn-danger" href="<?= $_SESSION['id_usuario'] == "1" || $_SESSION['id_usuario'] == "16" || $_SESSION['id_usuario'] == "20" ? "php/del_foto_funcionario.php?id=" . $foto['id'] : "" ?>">Remover</a>
 									<br />
-									<a href="<?= substr($foto['imagem'],3) ?>" target="_blank">
-									<img style="width: 300px;" src="<?= substr($foto['imagem'],3) ?>" /></a>
+									<a href="<?= substr($foto['imagem'], 3) ?>" target="_blank">
+									<img style="width: 300px;" src="<?= substr($foto['imagem'], 3) ?>" /></a>
 									<br /><br />
 									<?= ucfirst($foto['descr']) ?>
 								</div>

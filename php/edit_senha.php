@@ -6,8 +6,8 @@
 
     $usuario = $crud->pdo_src('usuario', 'WHERE id_usuario = ' . $info['id']);
 
-    $info['nova'] = crypt($info['nova'],'inforway');
-    $info['confirma'] = crypt($info['confirma'],'inforway');
+    $info['nova'] = crypt($info['nova'], 'inforway');
+    $info['confirma'] = crypt($info['confirma'], 'inforway');
 
     if ($info['nova'] == $info['confirma']) {
 
@@ -18,7 +18,7 @@
 		    window.location.href='../ger_user';
 		    </SCRIPT>");
 
-    }else {
+    } else {
 
         echo ("<SCRIPT LANGUAGE='JavaScript'>
 		    window.alert('Senhas não conferem!');

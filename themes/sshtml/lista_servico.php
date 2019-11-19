@@ -3,13 +3,13 @@ $servico = $crud->pdo_src('servico', 'ORDER BY servico');
 
 //protege de entrada sem login
 if(@$_SESSION != array()){
-	// if(@$_SESSION['perm_modulos'] == "1"){
-	//
-	// }else{
-	// 	echo "<script>window.location.href='403';</script>";
-	// }
+    // if(@$_SESSION['perm_modulos'] == "1"){
+    //
+    // }else{
+    // 	echo "<script>window.location.href='403';</script>";
+    // }
 }else{
-	echo "<script>window.location.href='index.php';</script>";
+    echo "<script>window.location.href='index.php';</script>";
 }
 ?>
 

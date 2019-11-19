@@ -12,7 +12,7 @@ $info = $_POST;
 $crud->pdo_cadastro('recibo', $info);
 //fim------------------------------
 
-$id_recibo = $crud->pdo_src('recibo','ORDER BY id DESC LIMIT 1')[0][0];
+$id_recibo = $crud->pdo_src('recibo', 'ORDER BY id DESC LIMIT 1')[0][0];
 
 // //dados para o histórico
 // unset($info['id_marca_equip_ti']);

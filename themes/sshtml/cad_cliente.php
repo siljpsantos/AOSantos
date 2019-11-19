@@ -1,11 +1,11 @@
 <?php
 
 
-	// $proposta = $crud->pdo_src('equip_ti', 'WHERE id = '.$_GET['id'])[0];
-	// $marcas = $crud->pdo_src('marca_equip_ti', 'order by marca_equip_ti ');
-	// //$modelos = $crud->pdo_src('modelo_equip_ti', 'order by modelo_equip_ti ');
-	// $categorias = $crud->pdo_src('categoria_equip_ti', 'order by categoria_equip_ti ');
-	// $unidades = $crud->pdo_src('unidade', 'order by nome ');
+    // $proposta = $crud->pdo_src('equip_ti', 'WHERE id = '.$_GET['id'])[0];
+    // $marcas = $crud->pdo_src('marca_equip_ti', 'order by marca_equip_ti ');
+    // //$modelos = $crud->pdo_src('modelo_equip_ti', 'order by modelo_equip_ti ');
+    // $categorias = $crud->pdo_src('categoria_equip_ti', 'order by categoria_equip_ti ');
+    // $unidades = $crud->pdo_src('unidade', 'order by nome ');
 
 ?>
 

@@ -72,10 +72,10 @@ if ($_POST) {
 		<link href="_cdn/fa-5.8.2/css/all.css" rel="stylesheet">
 
         <!-- LOADING PROGRESS BARS - PACE.js -->
-        <?php if(strpos($Url[0],'impr') !== false){ ?>
+        <?php if (strpos($Url[0], 'impr') !== false) { ?>
           <script src="_cdn/pace.js"></script>
           <link href="_cdn/pace_progress.css" rel="stylesheet">
-        <?php }else{ ?>
+        <?php } else { ?>
           <script src="_cdn/pace.js"></script>
           <link href="_cdn/pace_thin.css" rel="stylesheet">
         <?php } ?>
@@ -87,7 +87,7 @@ if ($_POST) {
         if(strpos($Url[0],'impr') !== false){
 
         }else{
-          require REQUIRE_PATH . "/inc/menu.php";
+            require REQUIRE_PATH . "/inc/menu.php";
         }
         //MENU SUPERIOR
 
@@ -95,8 +95,10 @@ if ($_POST) {
         $Url[1] = (empty($Url[1]) ? HOME : $Url[1]);
         if (file_exists(REQUIRE_PATH . '/' . $Url[0] . '.php')):
             require REQUIRE_PATH . '/' . $Url[0] . '.php';
-        else:
+        else {
+            :
             require REQUIRE_PATH . '/404.php';
+        }
         endif;
         //CONTEÚDO
 

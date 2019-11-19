@@ -7,7 +7,7 @@ $info = $_POST;
 //print_r($info);
 
 $info['id_proposta'] = $info['id_prop_cli'];
-unset( $info['id_prop_cli']);
+unset($info['id_prop_cli']);
 
 // echo "<pre>";
 // print_r($info);
@@ -21,13 +21,13 @@ $sql = 'INSERT INTO tb_contrato(
 
 try {
 
-	$prepara = $crud->pdo->prepare($sql);
+    $prepara = $crud->pdo->prepare($sql);
 
-	$controle = 1;
-	foreach ($info as $index => $key) {
-	    $prepara->bindParam($controle, $info[$index], PDO::PARAM_INT);
-	    $controle += 1;
-	}
+    $controle = 1;
+    foreach ($info as $index => $key) {
+        $prepara->bindParam($controle, $info[$index], PDO::PARAM_INT);
+        $controle += 1;
+    }
 
 } catch (PDOException $e) {
     print "Error!: " . $e->getMessage() . "<br/>";
@@ -39,11 +39,11 @@ try {
 $prepara->execute();
 
 $id_contrato = $crud->query_p('SELECT * FROM tb_contrato ORDER BY id_contrato DESC LIMIT 1')[0][0];
-$crud->query_void('UPDATE tb_proposta SET id_contrato = '.$id_contrato.' WHERE id = '.$info['id_proposta']);
+$crud->query_void('UPDATE tb_proposta SET id_contrato = ' . $id_contrato . ' WHERE id = ' . $info['id_proposta']);
 
 //retorna para a lista
 ?>
 <script type="text/javascript">
 alert("Contrato cadastrado com sucesso!");
-window.location.href = "<?= "../edita_contrato?id=".$id_contrato ?>";
+window.location.href = "<?= "../edita_contrato?id=" . $id_contrato ?>";
 </script>

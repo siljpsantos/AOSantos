@@ -4,9 +4,9 @@
 
     $info = $_POST;
 
-    $info['senha_usuario'] = crypt($info['senha_usuario'],'inforway');
+    $info['senha_usuario'] = crypt($info['senha_usuario'], 'inforway');
 
-    $crud->pdo_cadastro('usuario',$info);
+    $crud->pdo_cadastro('usuario', $info);
 
 ?>
 <script type="text/javascript">

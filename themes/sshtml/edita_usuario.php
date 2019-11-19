@@ -3,11 +3,11 @@
     //protege de entrada sem login
     if ($_SESSION != array()) {
 
-    }else {
+    } else {
         echo "<script>window.location.href='" . HOME . "/403';</script>";
     }
 
-    $usuario = $crud->pdo_src('usuario', 'WHERE id_usuario = ' . base64_decode($_GET['id']) )[0];
+    $usuario = $crud->pdo_src('usuario', 'WHERE id_usuario = ' . base64_decode($_GET['id']))[0];
 
 ?>
 
@@ -154,7 +154,7 @@
 									</div>
 								</div>
 
-                <?php if($_SESSION['id_usuario'] =="1"){ ?>
+                <?php if ($_SESSION['id_usuario'] == "1") { ?>
 
                   <div class="col-md-3 grade">
         						<div class="form-check">

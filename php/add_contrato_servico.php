@@ -8,7 +8,7 @@ $info = $_POST;
 // print_r($info);
 // exit();
 
-$servico = $crud->pdo_src('servico', 'WHERE id = '.$info['id_servico']);
+$servico = $crud->pdo_src('servico', 'WHERE id = ' . $info['id_servico']);
 $info['val'] = $servico[0]['preco'];
 
 //cadastra funcionario----------------

@@ -1,16 +1,16 @@
 <?php
-	//protege entrada sem permissão
-	if(@$_SESSION == array()){
-		echo "<script>window.location.href='" . HOME . "/403';</script>";
-	}else{
-		// if ($_SESSION['perm_frota'] == "1") {
-		// } else {
-		// 	echo "<script>window.location.href='" . HOME . "/403';</script>";
-		// }
-	}
-	$loc = $crud->pdo_src('cliente', '');
-	$usuarios = $crud->pdo_src('usuario', '');
-	$propostas = $crud->query_p("
+    //protege entrada sem permissão
+    if(@$_SESSION == array()){
+        echo "<script>window.location.href='" . HOME . "/403';</script>";
+    }else{
+        // if ($_SESSION['perm_frota'] == "1") {
+        // } else {
+        // 	echo "<script>window.location.href='" . HOME . "/403';</script>";
+        // }
+    }
+    $loc = $crud->pdo_src('cliente', '');
+    $usuarios = $crud->pdo_src('usuario', '');
+    $propostas = $crud->query_p("
 		SELECT p.*
 		FROM tb_proposta p WHERE p.id_contrato = 0 AND p.del_yn != 1 AND p.ass != 0
 	");
@@ -32,15 +32,15 @@
 									<select class="form-control" required name="id_prop_cli">
 										<option></option>
 										<?php
-											foreach($propostas as $index=>$key){
+                                            foreach($propostas as $index=>$key){
 
-												$id = $key['id'];
-												$nome = $key['num_proposta'];
+                                                $id = $key['id'];
+                                                $nome = $key['num_proposta'];
 
-												echo "<option value='$id'>$nome</option>";
+                                                echo "<option value='$id'>$nome</option>";
 
-											}
-										?>
+                                            }
+                                        ?>
 									</select>
 								</div>
 								<div class="col-md-6">
@@ -48,19 +48,19 @@
 									<select style="width: 100%;" class="form-control" required name="id_cliente">
 										<option></option>
 										<?php
-											foreach($loc as $index=>$key){
+                                            foreach($loc as $index=>$key){
 
-												$id = $key['id'];
-												$nome = $key['nome'];
+                                                $id = $key['id'];
+                                                $nome = $key['nome'];
 
-												if($id == $contrato['id_cliente']){
-													echo "<option selected value='$id'>$nome</option>";
-												}else{
-													echo "<option value='$id'>$nome</option>";
-												}
+                                                if($id == $contrato['id_cliente']){
+                                                    echo "<option selected value='$id'>$nome</option>";
+                                                }else{
+                                                    echo "<option value='$id'>$nome</option>";
+                                                }
 
-											}
-										?>
+                                            }
+                                        ?>
 									</select>
 								</div>
 								<div class="col-md-3">
@@ -68,15 +68,15 @@
 									<select class="form-control" required name="id_responsavel">
 										<option></option>
 										<?php
-											foreach($usuarios as $index=>$key){
+                                            foreach($usuarios as $index=>$key){
 
-												$id = $key['id_usuario'];
-												$nome = $key['nome_usuario'];
+                                                $id = $key['id_usuario'];
+                                                $nome = $key['nome_usuario'];
 
-												echo "<option value='$id'>$nome</option>";
+                                                echo "<option value='$id'>$nome</option>";
 
-											}
-										?>
+                                            }
+                                        ?>
 									</select>
 								</div>
 

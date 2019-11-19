@@ -22,19 +22,19 @@ $sql = "UPDATE tb_contrato SET id_responsavel = ?, id_cliente = ?, nome = ?, num
 	logradouro = ?, bairro = ?, cidade = ?, estado = ?, cep = ? WHERE id_contrato = ?";
 
 try {
-	$prepara = $crud->pdo->prepare($sql);
+    $prepara = $crud->pdo->prepare($sql);
 
-	$controle = 1;
-	foreach ($info as $index => $key) {
-	    if ($index !== $campo_id) {
-	        $prepara->bindParam($controle, $info[$index], PDO::PARAM_INT);
-	        $controle += 1;
-	    }
-	}
+    $controle = 1;
+    foreach ($info as $index => $key) {
+        if ($index !== $campo_id) {
+            $prepara->bindParam($controle, $info[$index], PDO::PARAM_INT);
+            $controle += 1;
+        }
+    }
 
-	$prepara->bindParam($controle, $info[$campo_id], PDO::PARAM_INT);
+    $prepara->bindParam($controle, $info[$campo_id], PDO::PARAM_INT);
 
-	$prepara->execute();
+    $prepara->execute();
 
 } catch (PDOException $e) {
     print "Error!: " . $e->getMessage() . "<br/>";

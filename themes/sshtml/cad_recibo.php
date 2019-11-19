@@ -1,14 +1,14 @@
 <?php
 if(@$_SESSION != array()){
-  // if(@$_SESSION['perm_frota'] == "1"){
-  //
-  // }else{
-  // 	echo "<script>window.location.href='403';</script>";
-  // }
+    // if(@$_SESSION['perm_frota'] == "1"){
+    //
+    // }else{
+    // 	echo "<script>window.location.href='403';</script>";
+    // }
 }else{
-  echo "<script>window.location.href='index.php';</script>";
+    echo "<script>window.location.href='index.php';</script>";
 }
-  	$contrato= $crud->pdo_src('contrato','order by nome
+        $contrato= $crud->pdo_src('contrato','order by nome
      ');
 
 ?>
@@ -37,12 +37,12 @@ if(@$_SESSION != array()){
                           <select required class="form-control" name="id_contrato">
                                           <option></option>
                                           <?php
-                                          foreach ($contrato as $key) {
-                                              $id = $key['id_contrato'];
-                                              $nome = $key['nome'];
+                                            foreach ($contrato as $key) {
+                                                $id = $key['id_contrato'];
+                                                $nome = $key['nome'];
                                 echo "<option value=$id>$nome</option>";
-                                          }
-                                          ?>
+                                            }
+                                            ?>
                                       </select>
             						</div>
             						<div class="col-md-3">

@@ -1,23 +1,23 @@
 <?php
 
-	//protege entrada sem permissão
-	if(@$_SESSION == array()){
-		echo "<script>window.location.href='" . HOME . "/403';</script>";
-	}else{
-		// if ($_SESSION['perm_frota'] == "1") {
-		// } else {
-		// 	echo "<script>window.location.href='" . HOME . "/403';</script>";
-		// }
-	}
+    //protege entrada sem permissão
+    if(@$_SESSION == array()){
+        echo "<script>window.location.href='" . HOME . "/403';</script>";
+    }else{
+        // if ($_SESSION['perm_frota'] == "1") {
+        // } else {
+        // 	echo "<script>window.location.href='" . HOME . "/403';</script>";
+        // }
+    }
 
-	@$id = $_SESSION['id_usuario'];
-	@$id_adm = $_SESSION['id_adm'];
+    @$id = $_SESSION['id_usuario'];
+    @$id_adm = $_SESSION['id_adm'];
 
-	$contrato = $crud->pdo_src('contrato', '');
+    $contrato = $crud->pdo_src('contrato', '');
 
-	if($perm_f){
-		$contrato = $crud->pdo_src('contrato', 'WHERE id_contrato = 3');
-	}
+    if($perm_f){
+        $contrato = $crud->pdo_src('contrato', 'WHERE id_contrato = 3');
+    }
 
 ?>
 <div style="margin: 0 10px 0 10px">
@@ -45,10 +45,10 @@
 							</thead>
 							<tbody>
 
-								<?php foreach($contrato as $index=>$key){ ?>
+								<?php foreach ($contrato as $index=>$key) { ?>
 
 
-										<tr <?=  "onclick='window.open(\"edita_contrato?id=".$key['id_contrato']."\")' " ?> style='border-bottom: 1px solid #ababab; cursor: pointer; <?php if($key['ass']=="0"){echo "color: red;";} ?>'>
+										<tr <?=  "onclick='window.open(\"edita_contrato?id=" . $key['id_contrato'] . "\")' " ?> style='border-bottom: 1px solid #ababab; cursor: pointer; <?php if ($key['ass'] == "0") {echo "color: red;"; } ?>'>
 
 											<td>
 												<?php echo $key['nome'] ?>
@@ -58,12 +58,12 @@
 											</td>
 											<td>
 												<?php
-													if($key['ass']=="1"){
-														echo "Assinado";
-													}else{
-														echo "Em aberto / Aguardando Assinatura";
-													}
-												?>
+                                                    if($key['ass']=="1"){
+                                                        echo "Assinado";
+                                                    }else{
+                                                        echo "Em aberto / Aguardando Assinatura";
+                                                    }
+                                                ?>
 											</td>
 										</tr>
 
@@ -74,7 +74,7 @@
 					</div>
 				</div>
 			</div>
-		<?php }else{ ?>
+		<?php } else { ?>
 			<div class="panel panel-default">
 				<div class="panel-heading"><center><h2>USUARIO SOMENTE PARA CADASTRO</h3></center></div>
 			</div>
